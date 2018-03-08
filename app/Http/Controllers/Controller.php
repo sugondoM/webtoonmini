@@ -9,5 +9,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    //use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $layout = "layout.main";
+
+    protected function setupLayout() 
+    {
+    	if ( ! null == $this->layout){
+    		$this->layout = View::make($this->layout);
+    	}
+    } 
 }
