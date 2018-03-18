@@ -7,3 +7,14 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+.header{ 
+    height: 50px;
+
+    .menu-button{
+        text-decoration: none;
+        color: $color-primary;
+        background-color: $color-secondary;
+    }
+}
