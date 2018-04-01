@@ -27,5 +27,11 @@ Route::get('/shop', 'Front\ShopController@getShopPage');
 Route::get('/donate', 'Front\DonateController@getDonatePage');
 Route::get('/recommend', 'Front\RecommendController@getRecommendPage');
 
-Route::get('/uploadfile','Admin\AdminController@getIndexPage');
+Route::get('/uploadfile','Admin\AdminController@getUploadPage');
 Route::post('/uploadfile','Admin\AdminController@showUploadFile');
+
+Route::get('/uploadseries','Admin\AdminController@showUploadSeriesPage');
+Route::post('/uploadseries','Admin\AdminController@doUploadSeries');
+
+Route::get('/admlistseries','Admin\AdminController@showListSeriesPage');
+

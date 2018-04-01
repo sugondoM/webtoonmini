@@ -1,12 +1,6 @@
-@extends('header')
-
-@section('title', 'Admin')
+@extends('admin.layouts.master')
 
 @section('content')
-<div class="content">
-    <div id="banner">   
-    </div>
-   
-</div>
+
 @endsection
 

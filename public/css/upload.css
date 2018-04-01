@@ -1,0 +1,135 @@
+#submit-button, .thumbnail-image-button, .upload-image-button{
+    display: none;
+}
+
+#add-new-file, .upload-item{
+    width: 150px;
+    height: 300px;
+    margin: 20px;
+    float: left;   
+}
+
+#add-new-file, .upload-image-container{
+    width: 150px;
+    margin-bottom: 10px;
+    border: 3px dashed #777777;
+    border-radius: 10px;
+}
+
+.thumbnail-image-container{
+    
+   
+}
+
+.thumbnail-image-priview{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    border: 3px dashed #777777;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-image-priview{
+    height: 200px;
+    width: 150px;
+    border-radius: 10px;
+}
+
+
+
+.upload-page-number{
+    width: 50px;
+}
+
+.upload-number-container{
+    float: right;
+}
+
+#upload-finalize{
+    clear: both;
+}
+
+#upload-finalize{
+    clear: both;
+    width: 100%;
+    background-color: #ccc;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#upload-finalize:hover{
+    background-color: #444;
+}
+
+#page-upload-left{
+    width: 25%;
+    float: left;
+}
+
+#page-upload-right{
+    width: 75%;
+    float: left;
+}
+
+#upload-box{
+    height: 600px;
+    overflow-y: scroll;
+}
+
+#page-sitemap-wrapper{
+    width: 100%;
+}
+
+#page-sitemap-container{
+    padding-bottom: 8px;
+    padding-top: 8px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+#page-content-wrapper{
+    padding: 20px;
+}
+
+.sitemap-bullet{
+    width: 30px !important;
+    font-size: 21px;
+    border-radius: 30px;
+    margin: auto;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+}
+
+.sitemap-bullet.active{
+    background: #00d564;
+    color: white;
+}
+
+.sitemap-desc{
+    font-size: 21px;
+    line-height: 30px;
+    padding-left: 10px;
+    display: inline-block;
+
+}
+
+.sitemap-separator{
+    font-size: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
+
+.sitemap-item{
+    margin: 10px 20px 10px 20px;
+    display: inline;
+}
+
+.list-series-item{
+    width: 100%;
+    border-bottom: 1px solid;
+}

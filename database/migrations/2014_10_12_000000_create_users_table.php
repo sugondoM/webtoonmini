@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('USER', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username',45);
-            $table->string('avatar_url',150);
+            $table->string('avatar_url',600);
             $table->string('email',45);
             $table->string('password');
             $table->string('type',10);
@@ -26,15 +26,13 @@ class CreateUsersTable extends Migration
             $table->string('remember_token', 100)->nullable();
         });
         
-        Schema::create('COMIC', function (Blueprint $table) {
+        Schema::create('SERIES', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('comic_title',45);
+            $table->string('series_title',45);
             $table->string('author',45);
-            $table->string('cover_url',150);
-            $table->string('description',150);
-            $table->integer('total_view');
-            $table->integer('like_id');
-            $table->integer('comment_id');
+            $table->string('thumbnail_url',600);
+            $table->string('summary',600);
+            $table->integer('total_view')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
             $table->boolean('deleted');
@@ -45,25 +43,29 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('file_url',150);
             $table->integer('type');
-            $table->integer('comic_id');
-            $table->integer('like_id');
-            $table->integer('comment_id');
+            $table->integer('series_id');
+            $table->date('created_at');
+            $table->date('updated_at');
         });
         
-        Schema::create('CHAPTER', function (Blueprint $table) {
+        Schema::create('EPISODE', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('chapter_number');
-            $table->string('chapter_title',45);
-            $table->integer('comic_id');
-            $table->integer('like_id');
-            $table->integer('comment_id');
+            $table->integer('episode_number');
+            $table->string('episode_title',45);
+            $table->string('thumbnail_url',600);
+            $table->integer('series_id');
+            $table->integer('total_view')->nullable();
+            $table->date('created_at');
+            $table->date('updated_at');
         });
         
         Schema::create('PAGE', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('page_number');
-            $table->string('file_url',150);
-            $table->integer('chapter_id');
+            $table->string('file_url',600);
+            $table->integer('episode_id');
+            $table->date('created_at');
+            $table->date('updated_at');
         });
         
     }
@@ -76,9 +78,9 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('USER');
-        Schema::dropIfExists('COMIC');
+        Schema::dropIfExists('SERIES');
         Schema::dropIfExists('GALLERY');
-        Schema::dropIfExists('CHAPTER');
+        Schema::dropIfExists('EPISODE');
         Schema::dropIfExists('PAGE');      
     }
 }

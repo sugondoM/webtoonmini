@@ -9,7 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href={{asset('css/upload.css')}} rel="stylesheet" type="text/css">
+        
         <!-- Styles -->
         <style>
             html, body {
@@ -65,12 +66,6 @@
         </style>
     </head>
     <body>
-        <?php
-            echo Form::open(array('url' => '/uploadfile','files'=>'true'));
-            echo 'Select the file to upload.';
-            echo Form::file('image');
-            echo Form::submit('Upload File');
-            echo Form::close();
-        ?>
+        
     </body>
 </html>

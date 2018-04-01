@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> @yield('title') </title>
+        <link href="{!! asset('css/upload.css') !!}" rel="stylesheet" type="text/css">
         <style type="text/css">
             #banner{
                 height: 100px;
@@ -12,7 +13,8 @@
                 background-color: #44ffaa;
             }
         </style>
-       
+        {!! Html::script('js/jquery-3.3.1.min.js') !!}
+        
     </head>
     <body>
         <div class="flex-center position-ref full-height">
