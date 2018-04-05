@@ -7,27 +7,87 @@
     height: 300px;
     margin: 20px;
     float: left;   
+    position: relative;
+}
+
+.upload-item .upload-cancel-button{
+    background-color: #a70000;
+    color: #fff;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    margin-top: 5px;
+    right: 0px;
+    cursor: pointer;
+}
+
+.upload-cancel-button:hover{
+    background-color: #ff0000;
 }
 
 #add-new-file, .upload-image-container{
-    width: 150px;
+    width: 156px;
     margin-bottom: 10px;
     border: 3px dashed #777777;
     border-radius: 10px;
-}
-
-.thumbnail-image-container{
-    
-   
-}
-
-.thumbnail-image-priview{
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    border: 3px dashed #777777;
-    text-align: center;
+    height: 206px;
     cursor: pointer;
+}
+
+.icon-container{
+   
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.icon-container.add{
+    background: url("/images/add-circular-button.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.thumbnail-image-container{   
+   width: 206px;
+   height: 206px;
+   border-radius: 10px;
+   border: 3px dashed #777777;
+   position: relative;
+   cursor: pointer;
+   text-align: center;
+}
+
+.thumbnail-image-container.big{   
+   width: 300px;
+   height: 400px;
+}
+
+.thumbnail-image-container.big img{   
+   max-width: 100%;
+   max-height: 100%;
+   width: auto;
+   height: auto;
+}
+
+.thumbnail-image-container:hover, .upload-image-container:hover, #add-new-file:hover{ 
+    border: 3px dashed #00d564;
+}
+
+.thumbnail-image-container p{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 75px;
+}
+
+.thumbnail-image-priview{   
+    cursor: pointer;
+    z-index: 10;
 }
 
 .upload-image-priview{
@@ -63,16 +123,22 @@
 }
 
 #upload-finalize:hover{
-    background-color: #444;
+    background-color: #00d564;
 }
 
 #page-upload-left{
     width: 25%;
+    min-width: 200px;
     float: left;
+}
+
+#page-upload-left.thumb-big{
+    min-width: 300px;
 }
 
 #page-upload-right{
     width: 75%;
+    min-width: 400px;
     float: left;
 }
 
@@ -93,6 +159,7 @@
 
 #page-content-wrapper{
     padding: 20px;
+    padding-bottom: 50px;
 }
 
 .sitemap-bullet{

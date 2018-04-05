@@ -1,0 +1,229 @@
+/* W3.CSS 4.10 February 2018 by Jan Egil and Borge Refsnes */
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+/* Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize */
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}
+audio,canvas,progress,video{display:inline-block}progress{vertical-align:baseline}
+audio:not([controls]){display:none;height:0}[hidden],template{display:none}
+a{background-color:transparent;-webkit-text-decoration-skip:objects}
+a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}
+dfn{font-style:italic}mark{background:#ff0;color:#000}
+small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sub{bottom:-0.25em}sup{top:-0.5em}figure{margin:1em 40px}img{border-style:none}svg:not(:root){overflow:hidden}
+code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}hr{box-sizing:content-box;height:0;overflow:visible}
+button,input,select,textarea{font:inherit;margin:0}optgroup{font-weight:bold}
+button,input{overflow:visible}button,select{text-transform:none}
+button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button}
+button::-moz-focus-inner, [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner{border-style:none;padding:0}
+button:-moz-focusring, [type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring{outline:1px dotted ButtonText}
+fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}
+legend{color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}
+[type=checkbox],[type=radio]{padding:0}
+[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}
+[type=search]{-webkit-appearance:textfield;outline-offset:-2px}
+[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}
+::-webkit-input-placeholder{color:inherit;opacity:0.54}
+::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}
+/* End extract */
+html,body{font-family:Verdana,sans-serif;font-size:15px;line-height:1.5}html{overflow-x:hidden}
+h1{font-size:36px}h2{font-size:30px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}.w3-serif{font-family:serif}
+h1,h2,h3,h4,h5,h6{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin:10px 0}.w3-wide{letter-spacing:4px}
+hr{border:0;border-top:1px solid #eee;margin:20px 0}
+
+
+html,body {
+   height:100%;
+   background-color: #ffffff;
+}
+
+#filler-topbar-container{
+    height: 67px;
+}
+
+#main-topbar-container{
+    width: 100%;
+    clear: both;
+    position: fixed;
+    top: 0px;
+    z-index: 20;
+    height: 67px;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+#main-topbar-container a{
+    display: block;
+    height: 67px;
+    line-height: 70px;
+    font-size: 15px;
+    color: #000;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    width: 120px;
+}
+
+#main-topbar-container a.active{
+     color: #00d564;
+}
+
+#main-topbar-container a:hover{
+    color: #00d564;
+}
+#page-footer-filler{
+    height:50px;
+}
+
+#page-footer{
+    position: fixed;
+    bottom: 0px;
+    height:50px;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+    line-height: 50px;
+    background-color: #aaa !important;
+}
+
+#page-main-wrapper{
+    background-color: #fafafa;
+    min-height: 100vh;
+}
+
+#page-main-wrapper #banner{
+    height: 200px;
+    width: 100%;
+    background-color: #00d564;
+}
+
+#page-main-container{
+    width: 900px;
+    margin: auto;
+    position: relative;
+}
+
+#page-main-container #banner-mk2{
+    height: 200px;
+    width: 100%;
+    background-color: peachpuff;
+}
+
+.banner-link-container{
+    clear: both;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.width-50{
+    width: 46%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.banner-link-item {
+    float: left;
+    height: 100px;
+    background-color: aqua;
+}
+.first-color{
+    background-color: aliceblue;
+}
+.second-color{
+    background-color: aquamarine;
+}
+#page-recommend-wrapper{
+    height: 200px;
+}
+
+#page-recommend-wrapper .recommend-container{
+    width: 900px;
+    height: 200px;
+    margin: auto;
+}
+
+.first-color .recomend-image{
+    width: 900px;
+    height: 200px;
+    background-color: #fafafa;
+}
+
+.second-color .recomend-image{
+    width: 900px;
+    height: 200px;
+    background-color: #ccc;
+}
+
+#page-sidegallery-container{
+    width: 17%;
+    background-color: #ccc;
+    min-height: 100vh;
+    position: relative;
+}
+#page-itemgallery-container{
+    width: 38%;
+    background-color: #fff;
+    min-height: 100vh;
+    position: relative;
+}
+#page-viewgallery-container{
+    width: 45%;
+    background-color: #000;
+    min-height: 100vh;
+    position: relative;
+}
+.floating{
+    float: left;
+    overflow: hidden;
+}
+.gallery-button-wrapper{
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    
+}
+.gallery-button-wrapper.huge-leap{
+    margin-top: 150px;
+}
+.gallery-button-container{
+    float: right;
+    clear: both;
+    width: 160px;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: #00d564;
+    line-height: 40px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.gallery-button-container.active, .gallery-button-container:hover{
+    background-color: green;
+}
+.gallery-box-container{
+    width: 120px;
+    height: 120px;
+    background: yellowgreen;
+    float: left;
+    margin: 20px;
+}
+.gallery-box-wrapper{
+    width: auto;
+    margin-left: 20px;
+    overflow: hidden;
+}
+.image-view{
+    min-width: 400px;
+    min-height: 400px;
+    width: 30vw;
+    height: 30vw;
+    background: #fff;
+    margin: auto;
+    margin-top: 100px;
+}
+

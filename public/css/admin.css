@@ -33,7 +33,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 
 html,body {
    height:100%;
-   background-color: #fafafa;
+   background-color: #ffffff;
 }
 .page-sidebar-block{
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
@@ -42,7 +42,7 @@ html,body {
     position: fixed !important;
     overflow: auto;
     color: #000 !important;
-    background-color: white !important;
+    background-color: #fafafa !important;
 }
 
 .page-sidebar-block .page-sidebar-item, .page-sidebar-block .page-sidebar-home{
@@ -98,7 +98,6 @@ html,body {
 #container{
     min-height: 100%;
     height: auto !important;
-    height: 100%;
     margin: 0 auto -50px;
 }
 
@@ -115,4 +114,209 @@ html,body {
 
 #page-sitemap-container.i2{
     text-align: center;
+}
+
+.box-drop-shadow{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.box-list-item{
+    display: inline-block;
+    cursor: pointer;
+    margin: 10px;
+   
+}
+
+.box-list-item .top-link{
+    height: 226px;
+    width: 226px;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.box-list-item .bottom-link{
+   height: 30px;
+    width: 226px;
+    position: relative;
+    background: #ccc;
+    text-align: center;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.box-list-item .bottom-link a{
+    color: #fff;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.bottom-link .width-50{
+    width: 50%;
+    float: left;
+}
+
+.box-list-item .top-link:hover{
+    
+    box-shadow: 0 2px 5px 0 rgba(0,213,100,0.16),0 2px 10px 0 rgba(0,213,100,0.12);
+}
+
+.box-list-item .bottom-link .edit:hover{
+    background: #00d564;
+    box-shadow: 0 2px 5px 0 rgba(0,100,213,0.16),0 2px 10px 0 rgba(0,100,213,0.12);
+}
+
+.box-list-item .bottom-link .delete:hover{
+    background: #aa0000;
+    box-shadow: 0 2px 5px 0 rgba(255,0,0,0.16),0 2px 10px 0 rgba(255,0,0,0.12);
+}
+
+
+.box-list-item a, #line-list-container a{
+    color: #000;
+    text-decoration: none;
+}
+
+.box-list-item img{
+    vertical-align: top;
+    border: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.box-list-item .genre{
+    top: 14px;
+    bottom: auto;
+    position: absolute;
+    left: 12px;
+    font-size: 13px;
+    line-height: 14px;
+    color: #00d564;
+}
+
+.box-list-item .info{
+    top: 58px;
+    left: 11px;
+    width: 206px;
+    height: 90px;
+    position: absolute;
+    text-align: left;
+}
+
+.box-list-item .title, .box-list-item .author{
+    margin-top: 5px;
+    font-size: 17px;
+    line-height: 17px;
+}
+
+.box-list-item .grade{
+    display: block;
+    position: absolute;
+    left: 11px;
+    bottom: 13px;
+    line-height: 17px;
+}
+
+#page-list-series{
+    padding-bottom: 20px;
+    margin-bottom: 100px;
+}
+
+p.page-section-info{
+  width: 220px;  
+}
+
+#page-smile-container{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+#page-smale-container{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#page-smile-container img{
+    border: none;
+}
+
+#page-list-series.fixed{
+    height: 100vh;
+}
+
+#section-list-left{
+    width: 70%;
+    float: left;
+    height: 100%;
+}
+
+#section-list-right{
+    width: 30%;
+    float: left;
+    position:relative;
+    height: 100%;
+}
+#section-list-right .series-description{
+    height: 100%;
+}
+#section-list-right img{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+}
+#line-list-container{
+    margin-top: 20px;
+    height: 90%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    margin-right: 20px;
+    overflow: auto;
+    
+}
+.line-list-item{
+    overflow: hidden;
+    margin: 10px;
+    border-bottom: 1px solid #aaa;
+}
+.line-list-item .image{
+    float: left;
+}
+.line-list-item .title{
+    float: left;
+    line-height: 70px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.line-list-item .button-container{
+    width : 100px;
+    float: right;
+}
+
+.line-list-item .button-container .edit, .line-list-item .button-container .delete{
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 6px;
+    text-align: center;
+    color: #fff;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 1px 0 rgba(0,0,0,0.16),0 2px 1px 0 rgba(0,0,0,0.12);
+}
+
+.line-list-item .button-container .edit:hover{
+    background: #00d564;
+    box-shadow: 0 2px 5px 0 rgba(0,100,213,0.16),0 2px 10px 0 rgba(0,100,213,0.12);
+}
+
+.line-list-item .button-container .delete:hover{
+    background: #aa0000;
+    box-shadow: 0 2px 5px 0 rgba(255,0,0,0.16),0 2px 10px 0 rgba(255,0,0,0.12);
+}
+
+
+.no-flow{
+    overflow: hidden;
 }

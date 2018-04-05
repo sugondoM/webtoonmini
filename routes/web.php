@@ -11,27 +11,38 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
 
 Route::get('/admin','Admin\AdminController@getAdminPage');
 Route::get('/login','Admin\AdminController@getLoginPage');
 Route::post('/login','Admin\AdminController@doLogin');
 Route::get('/list','Admin\AdminController@getUserList');
 
-Route::get('/profile', 'Front\ProfileController@getProfilePage');
-Route::get('/webtoon', 'Front\WebtoonController@getWebtoonPage');
-Route::get('/gallery', 'Front\GalleryController@getGalleryPage');
-Route::get('/shop', 'Front\ShopController@getShopPage');
-Route::get('/donate', 'Front\DonateController@getDonatePage');
-Route::get('/recommend', 'Front\RecommendController@getRecommendPage');
+Route::get('/',             'Front\WebtoonController@showHomePage');
+Route::get('/donate',       'Front\WebtoonController@showDonatePage');
+Route::get('/gallery',      'Front\WebtoonController@showGalleryPage');
+Route::get('/profile',      'Front\WebtoonController@showProfilePage');
+Route::get('/recommend',    'Front\WebtoonController@showRecommendPage');
+Route::get('/shop',         'Front\WebtoonController@showShopPage');
+Route::get('/webtoon',      'Front\WebtoonController@showWebtoonPage');
 
-Route::get('/uploadfile','Admin\AdminController@getUploadPage');
-Route::post('/uploadfile','Admin\AdminController@showUploadFile');
+Route::get('/adminprofile'                          ,'Admin\AdminController@showProfile');
+Route::get('/admineditprofile/{userid}'             ,'Admin\AdminController@showEditProfile'); 
+Route::get('/adminupload'                           ,'Admin\AdminController@showUploadSeries');
+Route::get('/adminupload/{series}'                  ,'Admin\AdminController@showUploadEpisode');
+Route::get('/adminlist'                             ,'Admin\AdminController@showSeriesList');
+Route::get('/adminlist/{series}'                    ,'Admin\AdminController@showEpisodesList');
+Route::get('/admineditseries/{series}'              ,'Admin\AdminController@showEditSeries');
+Route::get('/admineditepisode/{series}/{episode}'   ,'Admin\AdminController@showEditEpisode');
+Route::get('/adminuploadgallery'                    ,'Admin\AdminController@showUploadGallery');
+Route::get('/admingallery'                          ,'Admin\AdminController@showGallery');
+Route::get('/admingallery/{itemid}'                 ,'Admin\AdminController@showEditGalleryItem');
 
-Route::get('/uploadseries','Admin\AdminController@showUploadSeriesPage');
-Route::post('/uploadseries','Admin\AdminController@doUploadSeries');
-
-Route::get('/admlistseries','Admin\AdminController@showListSeriesPage');
+Route::post('/admineditseries'          ,'Admin\AdminController@doEditSeries');
+Route::post('/admineditepisode'         ,'Admin\AdminController@doEditEpisode');
+Route::post('/adminuploadepisode'       ,'Admin\AdminController@doUploadEpisode');
+Route::post('/adminuploadseries'        ,'Admin\AdminController@doUploadSeries');
+Route::post('/admineditprofile'         ,'Admin\AdminController@doEditProfile');
+Route::post('/admineditgalleryItem'     ,'Admin\AdminController@doEditGalleryItem');
+Route::post('/adminuploadgalleryItem'   ,'Admin\AdminController@doUploadGalleryItem');
 

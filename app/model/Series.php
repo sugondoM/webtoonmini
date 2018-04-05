@@ -16,4 +16,9 @@ class Series extends Model
     ];
     
     public $table = "SERIES";
+    
+    public function episode()
+    {
+        return $this->hasMany('App\model\Episode');
+    }
 }

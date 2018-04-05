@@ -56,12 +56,80 @@
             }
         }
         
-        public function getUploadPage(){
-            $insertedId = 1;
+        public function getUserList()
+        {
+            $users = User::all();
+
+            foreach ($users as $user) {
+                echo $user;
+                echo  "<br/>username: ".$user->username." , password: ".$user->password."<br/>";
+                
+                $userdata = array(
+                    'username'     => $user->username,
+                    'password'     => $user->password
+                );
+                if (Auth::attempt($userdata)) {
+                    echo 'SUCCESS!';
+                } else {  
+                    echo 'FAILED!';
+                    //return Redirect::to('admin');
+                }
+                
+            }
+        }
+        
+        public function doEditProfile(Request $request)
+        {
+            
+        }
+        
+        public function doEditSeries(Request $request)
+        {
+            
+        }
+        
+        public function doEditEpisode(Request $request)
+        {
+            
+        }
+        
+        public function doEditGalleryItem(Request $request)
+        {
+            
+        }
+        
+        public function doUploadSeries(Request $request)
+        {
+            //$insertedId = 1;
+            //return view('admin.uploadsfile')->with('series_id', $insertedId);
+            $user_id=1;
+            $filtered_title = str_replace(" ","_",$request['series_title']);
+            $destinationPath = 'uploads/u'.$user_id."_s".$filtered_title;
+            if($request['thumbnail']!=null){
+                $photo = $request['thumbnail'];
+                $filename = "thumbnail_".$photo->getClientOriginalName();
+                $thumbnail_url = $destinationPath."/".$request['thumbnail']->getClientOriginalName();
+                $photo->move($destinationPath,$filename);
+            }
+            
+            $series = new Series();
+            
+            $series->thumbnail_url = $destinationPath."/".$filename;
+            $series->series_title = $request['series_title'];
+            $series->author = $request['author'];
+            //$series->genre = $request['genre'];
+            $series->summary = $request['summary']; 
+            $series->deleted = 0; 
+            $series->user_id = 1;
+            $series->save();  
+            
+            
+            $insertedId = $series->id;
             return view('admin.uploadsfile')->with('series_id', $insertedId);
         }
         
-        public function showUploadFile(Request $request){
+        public function doUploadEpisode(Request $request)
+        {
             //dd($request['series_id']);
             $series = Series::where('id', $request['series_id'])
                ->first();
@@ -120,69 +188,89 @@
               
         }
         
-        public function getUserList()
+        public function doUploadGalleryItem(Request $request)
         {
-            $users = User::all();
-
-            foreach ($users as $user) {
-                echo $user;
-                echo  "<br/>username: ".$user->username." , password: ".$user->password."<br/>";
-                
-                $userdata = array(
-                    'username'     => $user->username,
-                    'password'     => $user->password
-                );
-                if (Auth::attempt($userdata)) {
-                    echo 'SUCCESS!';
-                } else {  
-                    echo 'FAILED!';
-                    //return Redirect::to('admin');
-                }
-                
-            }
+            
         }
         
+        public function showProfile()
+        {
+            
+        }
         
-        public function showUploadSeriesPage(){
+        public function showEditProfile($userid)
+        {
+            $user = user::where('id', $userid)
+               ->first();
+            
+            return view('admin.editprofile',compact('user'));
+        }
+        
+        public function showUploadSeries()
+        {
             return view('admin.uploadseries');
         }
         
-        public function showListSeriesPage(){
+        public function showUploadEpisode($series)
+        {
+            return view('admin.uploadepisode')->with('series_id', $series);
+        }
+        
+        public function showSeriesList()
+        {
             $series = Series::where('deleted', 0)
                ->orderBy('series_title', 'asc')
                ->get();
             
-            return view('admin.admlistseries',compact('series'));
+            return view('admin.listseries',compact('series'));
         }
         
-        public function doUploadSeries(Request $request){
-            //$insertedId = 1;
-            //return view('admin.uploadsfile')->with('series_id', $insertedId);
+        public function showEpisodesList($series)
+        {
+            $episodes = Episode::where('series_id', $series)
+               ->orderBy('episode_title', 'asc')
+               ->get();
             
-            $user_id=1;
-            $filtered_title = str_replace(" ","_",$request['series_title']);
-            $destinationPath = 'uploads/u'.$user_id."_s".$filtered_title;
-            if($request['thumbnail']!=null){
-                $photo = $request['thumbnail'];
-                $filename = "thumbnail_".$photo->getClientOriginalName();
-                $thumbnail_url = $destinationPath."/".$request['thumbnail']->getClientOriginalName();
-                $photo->move($destinationPath,$filename);
-            }
-            
-            $series = new Series();
-            
-            $series->thumbnail_url = $destinationPath."/".$filename;
-            $series->series_title = $request['series_title'];
-            $series->author = $request['author'];
-            //$series->genre = $request['genre'];
-            $series->summary = $request['summary']; 
-            $series->deleted = 0; 
-            $series->user_id = 1;
-            $series->save();  
+            $series = Series::where('id', $series)
+               ->orderBy('series_title', 'asc')
+               ->first();
             
             
-            $insertedId = $series->id;
-            return view('admin.uploadsfile')->with('series_id', $insertedId);
+            return view('admin.listepisode',compact('series','episodes'));
         }
-
+           
+        public function showEditSeries($series)
+        {
+            $series = Series::where('id', $series)
+               ->orderBy('series_title', 'asc')
+               ->first();
+            
+            return view('admin.editseries',compact('series'));
+        }
+        
+        public function showEditEpisode($series,$episode)
+        {
+            $episodes = Episode::where('id', $episode)
+               ->first();
+            
+            $pages = Page::where('episode_id', $episode)
+               ->orderBy('page_number', 'asc')
+               ->get();
+            
+            return view('admin.editepisode',compact('episodes','pages'));
+        }
+        
+        public function showGallery()
+        {
+            
+        }
+        
+        public function showEditGallery($itemid){
+            
+        }
+        
+        public function showUploadGallery(){
+            return view('admin.uploadgalleryitem',compact('episodes','pages'));
+        }
+        
     }

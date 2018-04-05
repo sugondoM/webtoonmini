@@ -13,4 +13,9 @@ class Page extends Model
         'file_url',
         'chapter_id'
     ];
+    
+    public function episode()
+    {
+        return $this->belongsTo('App\model\Episode');
+    }
 }
