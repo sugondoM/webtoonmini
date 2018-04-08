@@ -8,7 +8,7 @@
     </div>
 </div>
 <div id="page-content-wrapper">
-<form action="{{url('/uploadseries')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('/adminuploadseries')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" id="upload-count-total" name="file-count-total" value="1">
     <div id="page-upload-left">
@@ -36,6 +36,15 @@
                 <option value="comedy">Comedy</option>
                 <option value="romance">Romance</option>
             </select>
+            </div>
+            <div id="page-banner-container">
+                <h3 class="page-section-header">Banner</h3>
+                <div class="banner-image-container">
+                    <p>Select Image to upload</p>
+                    <img class="banner-image-priview" id="banner-image">
+                </div>
+                <input class="banner-image-button" id="banner-file" type="file" name="banner"/>
+                <p>Recommended size is not defined. Only JPG format is allowed</p>
             </div>
             <h3 class="page-section-header">Summary</h3>
             <textarea placeholder="Less Than 500 Character" value="" rows="10" cols="60" name="summary" class="width-80-500"></textarea>

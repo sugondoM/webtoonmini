@@ -7,7 +7,8 @@
 @section('content')
 <div id="page-main-wrapper">
     <div id="page-mini-header">
-        <span>{{$episodes->episode_title}}</span>       
+        <div id="left-episode">{{$episodes->episode_title}}</div> 
+        <div id="center-episode"> Episode {{$episodes->episode_number}} </div>
     </div>
     <div id="page-main-container" class="drop-shadow">
         <div class="pages-wrapper">

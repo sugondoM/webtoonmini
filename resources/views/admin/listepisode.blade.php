@@ -3,9 +3,14 @@
     <div id="page-content-wrapper" class="no-flow">
         <div id="page-list-series" class="fixed">
             <div id="section-list-left">
+                <div class="line-list-add">
+                    <a href="{{url('adminupload/'.$series->id)}}">
+                        Upload New Episodes
+                    </a>
+                </div>
                 <div id="line-list-container">
+                
                 @foreach ($episodes as $serie)
-                @for ($i=0;$i<10;$i++)
                         <div class="line-list-item">
                             <a href="{{url('admineditepisode/'.$serie->series_id."/".$serie->id)}}">
                     
@@ -23,7 +28,6 @@
                         </div>
                     
                     
-                @endfor
                 @endforeach
                 </div>
             </div>
@@ -36,6 +40,8 @@
                 </div>
             </div>
         </div>
+        
+     
     </div>
 @endsection
 

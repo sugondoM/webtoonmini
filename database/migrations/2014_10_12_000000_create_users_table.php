@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('series_title',45);
             $table->string('author',45);
             $table->string('thumbnail_url',600);
+            $table->string('banner_url',600);
             $table->string('summary',600);
             $table->integer('total_view')->nullable();
             $table->date('created_at');

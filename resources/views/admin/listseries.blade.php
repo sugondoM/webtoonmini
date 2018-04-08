@@ -3,7 +3,6 @@
     <div id="page-content-wrapper">
         <div id="page-list-series">
         @foreach ($series as $serie)
-            @for ($i=0;$i<20;$i++)
             <div class="box-list-item">
                 <div class="top-link">
                 <a href="{{url('adminlist/'.$serie->id)}}">
@@ -25,7 +24,7 @@
                     </a>
                 </div>
             </div>
-            @endfor
+           
         @endforeach
         </div>
     </div>

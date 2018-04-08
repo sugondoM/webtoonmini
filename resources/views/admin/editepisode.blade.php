@@ -27,6 +27,19 @@
         <input type="text" value="{{$episodes->episode_title}}" placeholder="Less Than 50 Character" name="episode_title"/>
         <div id="upload-box">
             <div id="upload-basket">
+                <div class="upload-item"  id="upload-item-1">
+                    <div class="upload-cancel-button" id="upload-cancel-1">x</div>                
+                    <div class="upload-image-container" id="upload-priview-1">
+                        <img class="upload-image-priview" id="upload-image-1" height="200">
+
+                    </div>
+                    <input class="upload-image-button" id="upload-file-1" type="file" name="photo[]">
+                    <div class="upload-number-container">
+                        <label>Page</label>
+                        <input class="upload-page-number" id="upload-number-1" type="text" name="pageNumber[]" value="1">
+                    </div>
+                </div>
+            {{--
             @foreach ($pages as $page)
             <div class="upload-item"  id="upload-item-{{$page->page_number}}">
                 <div class="upload-cancel-button" id="upload-cancel-{{$page->page_number}}">x</div>                
@@ -41,6 +54,7 @@
                 </div>
             </div>
             @endforeach
+            --}}
 
             </div>
              <div id="add-new-file"></div>

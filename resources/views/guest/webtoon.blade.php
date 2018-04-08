@@ -18,8 +18,7 @@
 
                 <div class="recommend-container">
                     <a href="/webtoon/series/{{$serie->id}}">
-                        <div class="recomend-image">
-                            <img src="/{{$serie->thumbnail_url}}"/>
+                        <div class="recomend-image" style="background: url('/{{$serie->banner_url}}')">
                         </div>
                     </a>
                 </div>

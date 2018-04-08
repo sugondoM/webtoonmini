@@ -35,6 +35,15 @@
                 <option value="romance">Romance</option>
             </select>
             </div>
+            <div id="page-banner-container">
+                <h3 class="page-section-header">Banner</h3>
+                <div class="banner-image-container">
+                    <p></p>
+                    <img class="banner-image-priview" id="banner-image" src="/{{$series->banner_url}}">
+                </div>
+                <input class="banner-image-button" id="banner-file" type="file" name="banner"/>
+                <p>Recommended size is not defined. Only JPG format is allowed</p>
+            </div>
             <h3 class="page-section-header">Summary</h3>
             <textarea placeholder="Less Than 500 Character" rows="10" cols="60" name="summary" class="width-80-500">{{$series->summary}}</textarea>
             <br/>

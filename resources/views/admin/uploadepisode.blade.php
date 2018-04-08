@@ -8,7 +8,7 @@
     </div>
 </div>
 <div id="page-content-wrapper">
-<form action="{{url('/uploadfile')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('/adminuploadepisode')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" name="series_id" value="{{$series_id}}">
     <input type="hidden" id="upload-count-total" name="file_count_total" value="1">

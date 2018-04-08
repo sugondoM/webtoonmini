@@ -84,6 +84,24 @@
             }
         });
         
+         $('.banner-image-container').click(function(){
+            console.log("banner clicked");
+            $("#banner-file").click();
+        });
+        
+        $("#banner-file").change(function(){
+            if ($('#banner-file')[0].files && $('#banner-file')[0].files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#banner-image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL($('#banner-file')[0].files[0]);
+                 $('.banner-image-container p').text('');
+            } else {
+                $('#banner-image').attr('src', '');
+            }
+        });
+        
         $("#upload-finalize").click(function(){
             $("#submit-button").click();
         });

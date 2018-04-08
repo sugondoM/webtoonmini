@@ -11,7 +11,7 @@
 		public function showWebtoonPage()
 		{
                     $series = Series::where('deleted', 0)
-                        ->orderBy('series_title', 'asc')
+                        ->orderBy('id', 'asc')
                         ->get();
                     
                     return view('guest.webtoon', compact('series'));
@@ -20,11 +20,11 @@
                 public function showWebtoonSeriesPage($series)
 		{
                     $episodes = Episode::where('series_id', $series)
-                        ->orderBy('episode_title', 'asc')
+                        ->orderBy('episode_number', 'asc')
                         ->get();
 
                     $series = Series::where('id', $series)
-                        ->orderBy('series_title', 'asc')
+                        ->orderBy('id', 'asc')
                         ->first();
                     
                     return view('guest.series', compact('series','episodes'));

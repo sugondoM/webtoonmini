@@ -6,10 +6,15 @@
 
 @section('content')
 <div id="page-main-wrapper">
-    <div id="banner">
-        <span>{{$series->series_title}}</span>       
+    <div id="page-recommend-wrapper" class="first-color">    
+        <div class="recommend-container">
+                <div class="recomend-image" style="background: url('/{{$series->banner_url}}')">
+                </div>
+        </div>
     </div>
     <div id="page-main-container" class="dark-background">
+        
+       
         <div class="episode-wrapper">
         @foreach($episodes as $episode)
             {{--@for($i=0; $i<20; $i++)--}}

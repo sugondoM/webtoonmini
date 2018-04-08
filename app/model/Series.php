@@ -10,6 +10,7 @@ class Series extends Model
         'series_title', 
         'author',
         'thumbnail_url',
+        'banner_url',
         'summary',
         'level',
         'user_id'

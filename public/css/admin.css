@@ -37,7 +37,7 @@ html,body {
 }
 .page-sidebar-block{
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-    height: 100%;
+    height: 1200px;
     width: 200px;
     position: fixed !important;
     overflow: auto;
@@ -96,9 +96,7 @@ html,body {
 }
 
 #container{
-    min-height: 100%;
-    height: auto !important;
-    margin: 0 auto -50px;
+    height: 1200px !important;
 }
 
 #page-footer{
@@ -110,6 +108,10 @@ html,body {
     vertical-align: middle;
     line-height: 50px;
     background-color: #aaa !important;
+}
+
+#page-footer-filler{
+    height:50px;
 }
 
 #page-sitemap-container.i2{
@@ -221,8 +223,8 @@ html,body {
 }
 
 #page-list-series{
-    padding-bottom: 20px;
-    margin-bottom: 100px;
+/*    padding-bottom: 20px;
+    margin-bottom: 100px;*/
 }
 
 p.page-section-info{
@@ -243,7 +245,7 @@ p.page-section-info{
 }
 
 #page-list-series.fixed{
-    height: 100vh;
+    height: 1200px;
 }
 
 #section-list-left{
@@ -263,13 +265,11 @@ p.page-section-info{
 }
 #section-list-right img{
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 50px;
+    margin-top: 30px;
 }
 #line-list-container{
     margin-top: 20px;
-    height: 90%;
+    height: 95%;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
     margin-right: 20px;
     overflow: auto;
@@ -316,6 +316,28 @@ p.page-section-info{
     box-shadow: 0 2px 5px 0 rgba(255,0,0,0.16),0 2px 10px 0 rgba(255,0,0,0.12);
 }
 
+.line-list-add{
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    text-align: center;
+    
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 1px 0 rgba(0,0,0,0.16),0 2px 1px 0 rgba(0,0,0,0.12);
+    width: 200px;
+}
+
+.line-list-add:hover{
+    background: #00d564;
+}
+
+.line-list-add a{
+    color: #fff;
+    text-decoration:none;
+}
 
 .no-flow{
     overflow: hidden;

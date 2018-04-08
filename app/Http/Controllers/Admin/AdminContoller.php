@@ -112,9 +112,17 @@
                 $photo->move($destinationPath,$filename);
             }
             
+            if($request['banner']!=null){
+                $photo = $request['banner'];
+                $filename2 = "banner".$photo->getClientOriginalName();
+                $thumbnail_url = $destinationPath."/".$request['banner']->getClientOriginalName();
+                $photo->move($destinationPath,$filename2);
+            }
+            
             $series = new Series();
             
             $series->thumbnail_url = $destinationPath."/".$filename;
+            $series->banner_url = $destinationPath."/".$filename2;
             $series->series_title = $request['series_title'];
             $series->author = $request['author'];
             //$series->genre = $request['genre'];
@@ -125,7 +133,7 @@
             
             
             $insertedId = $series->id;
-            return view('admin.uploadsfile')->with('series_id', $insertedId);
+            return view('admin.uploadepisode')->with('series_id', $insertedId);
         }
         
         public function doUploadEpisode(Request $request)
@@ -185,7 +193,13 @@
                     $page->save();
                 }
             }
-              
+            
+            $episodes = Episode::where('series_id', $request['series_id'])
+               ->orderBy('episode_title', 'asc')
+               ->get();
+            
+            
+            return view('admin.listepisode',compact('series','episodes'));
         }
         
         public function doUploadGalleryItem(Request $request)
@@ -228,11 +242,11 @@
         public function showEpisodesList($series)
         {
             $episodes = Episode::where('series_id', $series)
-               ->orderBy('episode_title', 'asc')
+               ->orderBy('series_id', 'asc')
                ->get();
             
             $series = Series::where('id', $series)
-               ->orderBy('series_title', 'asc')
+               ->orderBy('id', 'asc')
                ->first();
             
             
@@ -242,7 +256,7 @@
         public function showEditSeries($series)
         {
             $series = Series::where('id', $series)
-               ->orderBy('series_title', 'asc')
+               ->orderBy('id', 'asc')
                ->first();
             
             return view('admin.editseries',compact('series'));
