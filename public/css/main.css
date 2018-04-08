@@ -104,12 +104,18 @@ html,body {
     width: 900px;
     margin: auto;
     position: relative;
+    margin-bottom: 50px;
 }
 
 #page-main-container #banner-mk2{
     height: 200px;
     width: 100%;
     background-color: peachpuff;
+}
+
+.dark-background{
+    background: #fff;
+   
 }
 
 .banner-link-container{
@@ -155,6 +161,15 @@ html,body {
     width: 900px;
     height: 200px;
     background-color: #ccc;
+}
+
+.recomend-image{
+    text-align: center;
+}
+
+.recomend-image img{
+    height: 100%;
+    text-align: center;
 }
 
 #page-sidegallery-container{
@@ -225,5 +240,86 @@ html,body {
     background: #fff;
     margin: auto;
     margin-top: 100px;
+}
+.episode-wrapper{
+    padding: 20px 0px;
+}
+.episode-wrapper a{
+    color:#000;
+    text-decoration: none;
+}
+.episode-container{
+    background: #fff;
+    width: 60%;
+    min-width: 300px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.episode-left-container{
+    float: left;
+    width: 40%;
+    height: 100%;
+}
+.episode-right-container{
+    float: right;
+    text-align: right;
+    width: 60%;
+    height: 100%;
+}
+
+.episode-right-container img{
+    height: 100%;
+}
+
+.pages-container{
+    width: 100%;
+    line-height: 0px;
+}
+.pages-container img{
+    width: 100%;
+    line-height: 0px;
+   
+}
+.drop-shadow{
+     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+#page-thumbnail-container{
+    position: fixed;
+    right: 0;
+    width: 15%;
+    height: 100vh;
+    min-height: 600px;
+    background: #fff;
+    top: 67px;
+    overflow: auto;
+    padding-top: 40px;
+    padding-bottom: 1000px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.thumb-container{
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+    
+    min-width: 60px;
+    min-height: 60px;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
+.thumb-container img{
+    width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.thumb-container img:hover{
+    box-shadow: 0 2px 5px 0 rgba(0,213,100,0.16),0 2px 10px 0 rgba(0,213,100,0.12);
 }
 

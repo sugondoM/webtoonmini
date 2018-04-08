@@ -18,13 +18,15 @@ Route::get('/login','Admin\AdminController@getLoginPage');
 Route::post('/login','Admin\AdminController@doLogin');
 Route::get('/list','Admin\AdminController@getUserList');
 
-Route::get('/',             'Front\WebtoonController@showHomePage');
-Route::get('/donate',       'Front\WebtoonController@showDonatePage');
-Route::get('/gallery',      'Front\WebtoonController@showGalleryPage');
-Route::get('/profile',      'Front\WebtoonController@showProfilePage');
-Route::get('/recommend',    'Front\WebtoonController@showRecommendPage');
-Route::get('/shop',         'Front\WebtoonController@showShopPage');
-Route::get('/webtoon',      'Front\WebtoonController@showWebtoonPage');
+Route::get('/',                             'Front\WebtoonController@showHomePage');
+Route::get('/donate',                       'Front\WebtoonController@showDonatePage');
+Route::get('/gallery',                      'Front\WebtoonController@showGalleryPage');
+Route::get('/profile',                      'Front\WebtoonController@showProfilePage');
+Route::get('/recommend',                    'Front\WebtoonController@showRecommendPage');
+Route::get('/shop',                         'Front\WebtoonController@showShopPage');
+Route::get('/webtoon',                      'Front\WebtoonController@showWebtoonPage');
+Route::get('/webtoon/series/{series}',      'Front\WebtoonController@showWebtoonSeriesPage');
+Route::get('/webtoon/episode/{episode}',    'Front\WebtoonController@showWebtoonEpisodePage');
 
 Route::get('/adminprofile'                          ,'Admin\AdminController@showProfile');
 Route::get('/admineditprofile/{userid}'             ,'Admin\AdminController@showEditProfile'); 
