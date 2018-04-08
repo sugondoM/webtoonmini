@@ -1,5 +1,5 @@
 <div id="main-topbar-container">
-          
+    <div class="burger-menu">Menu</div>      
     <div class="header">
         <a class="menu-button @if(Request::path() == 'profile') active @endif" href = "{{url('profile')   }}" > Profile           </a>
         <a class="menu-button @if(Request::is('webtoon/*')) active @endif" href = "{{url('webtoon')   }}" > WebComic          </a>

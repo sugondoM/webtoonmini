@@ -152,18 +152,18 @@ html,body {
 }
 
 .first-color .recomend-image{
-    width: 900px;
+  
     height: 300px;
     background-color: #fafafa;
 }
 
 .second-color .recomend-image{
-    width: 900px;
     height: 300px;
     background-color: #ccc;
 }
 
 .recomend-image{
+    width: 900px;
     text-align: center;
 }
 
@@ -330,7 +330,7 @@ html,body {
     height: 300px;
     width: 900px;
     background-size: cover !important;
-    background-position-y: center !important;
+    background-position: center !important;
 }
 
 #page-mini-header{
@@ -352,3 +352,215 @@ html,body {
     text-align: center;
     float: left;
 }
+
+.burger-menu{
+    display: none;
+}
+
+.header{
+        display: block;
+    }
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+ #filler-topbar-container{
+        height: 40px;
+    }
+    #page-main-container{
+        width: 100%;
+    }
+    #page-recommend-wrapper .recommend-container {
+        width: 100%;
+    }
+    .recomend-image{
+        width: 100%;
+    }
+    
+    #page-thumbnail-container{
+        display: none;
+    }
+    
+    #main-topbar-container{
+        display: block;
+        height: 40px;
+    }
+    
+    .burger-menu{
+        display: block;
+        height: 42px;
+        line-height: 40px;
+        font-size: 15px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        width: 100%;
+        background-color: #000;
+        border-bottom: 1px solid;
+        
+    }
+    
+    #main-topbar-container a{
+        display: block;
+        height: 42px;
+        line-height: 40px;
+        font-size: 15px;
+        color: #000;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        width: 100%;
+        background-color: #fafafa;
+        border-bottom: 1px solid;
+    }
+    .header{
+        display: none;
+    }
+    #page-sidegallery-container.floating,#page-itemgallery-container.floating,#page-viewgallery-container.floating{
+        float: none;
+    }
+    #page-sidegallery-container,#page-itemgallery-container,#page-viewgallery-container{
+        width: 100%;
+        min-height: 0px;
+    }
+    
+    .gallery-button-wrapper, .gallery-button-wrapper.huge-leap{
+        margin: 5px 0;
+    }
+    
+    .gallery-button-container{
+        width: 100%;
+        float:none;
+    }
+     .gallery-box-wrapper{
+        margin-left: 0px;
+    }
+    .gallery-box-container{
+        width: 60px;
+        height: 60px;
+    }
+    
+    .image-view{
+        min-width: 10px;
+        min-height: 10px;
+        width: 240px;
+        height: 240px;
+        background: #fff;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-device-width : 320px) {
+/* Styles */
+
+    #filler-topbar-container{
+        height: 40px;
+    }
+    #page-main-container{
+        width: 100%;
+    }
+    #page-recommend-wrapper .recommend-container {
+        width: 100%;
+    }
+    .recomend-image{
+        width: 100%;
+    }
+    
+    #page-thumbnail-container{
+        display: none;
+    }
+    
+    #main-topbar-container{
+        display: block;
+        height: 40px;
+    }
+    
+    .burger-menu{
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        font-size: 15px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        width: 100%;
+        background-color: #000;
+        border-bottom: 1px solid;
+        
+    }
+    
+    #main-topbar-container a{
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        font-size: 15px;
+        color: #000;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        width: 100%;
+        background-color: #fafafa;
+        border-bottom: 1px solid;
+    }
+    .header{
+        display: none;
+    }
+    
+    #page-sidegallery-container.floating,#page-itemgallery-container.floating,#page-viewgallery-container.floating{
+        float: none;
+    }
+    #page-sidegallery-container,#page-itemgallery-container,#page-viewgallery-container{
+        width: 100%;
+        min-height: 0px;
+    }
+    
+    .gallery-button-wrapper, .gallery-button-wrapper.huge-leap{
+        margin: 5px 0;
+    }
+    
+    .gallery-button-container{
+        width: 100%;
+        float:none;
+    }
+    .gallery-box-wrapper{
+        margin-left: 0px;
+    }
+    .gallery-box-container{
+        width: 60px;
+        height: 60px;
+    }
+    
+    .image-view{
+        min-width: 10px;
+        min-height: 10px;
+        width: 240px;
+        height: 240px;
+        background: #fff;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+}
+
