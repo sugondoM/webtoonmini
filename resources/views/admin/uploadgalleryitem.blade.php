@@ -1,10 +1,9 @@
 @extends('admin.layouts.master')
 @section('content')
 <div id="page-sitemap-wrapper">
-    <div id="page-sitemap-container" class="i2">
-    <div class="sitemap-item"><div class="sitemap-desc">Upload Gallery</div></div>
-    </div>
+
 </div>
+<div id="container">
 <div id="page-content-wrapper">
 <form action="{{url('/uploadgalleryItem')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
@@ -48,6 +47,7 @@
     </div>
     
 </form>
+</div>
 </div>
 @endsection
 

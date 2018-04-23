@@ -1,13 +1,22 @@
+img{
+	border:0px;
+}
+
+h3, p{
+	color:#ccc;
+}
+
 #submit-button, .thumbnail-image-button, .upload-image-button, .banner-image-button{
     display: none;
 }
 
 #add-new-file, .upload-item{
     width: 150px;
-    height: 300px;
+    height: 225px;
     margin: 20px;
     float: left;   
     position: relative;
+    overflow: visible;
 }
 
 .upload-item .upload-cancel-button{
@@ -32,10 +41,10 @@
 #add-new-file, .upload-image-container{
     width: 156px;
     margin-bottom: 10px;
-    border: 3px dashed #777777;
-    border-radius: 10px;
+    border: 2px dashed #fff;
     height: 206px;
-    cursor: pointer;
+    vertical-align: middle;
+    display: table-cell;
 }
 
 .icon-container{
@@ -54,7 +63,7 @@
 
 .thumbnail-image-container, .banner-image-container{   
    border-radius: 10px;
-   border: 3px dashed #777777;
+   border: 3px dashed #fff;
    position: relative;
    cursor: pointer;
    text-align: center;
@@ -78,6 +87,8 @@
 .thumbnail-image-container.big{   
    width: 300px;
    height: 400px;
+   display: table-cell;
+   vertical-align: middle;
 }
 
 .thumbnail-image-container.big img{   
@@ -88,7 +99,7 @@
 }
 
 .thumbnail-image-container:hover, .banner-image-container:hover, .upload-image-container:hover, #add-new-file:hover{ 
-    border: 3px dashed #00d564;
+    border: 3px dashed #58001a;
 }
 
 .thumbnail-image-container p, .banner-image-container p{
@@ -104,9 +115,8 @@
 }
 
 .upload-image-priview{
-    height: 200px;
+    height: auto;
     width: 150px;
-    border-radius: 10px;
 }
 
 
@@ -116,14 +126,20 @@
 }
 
 .upload-number-container{
-    float: right;
+    margin: 0px 5px;
+    
+}
+.upload-number-container label{
+	color: #58001a;
+    font-size: 12px;
 }
 
 #upload-finalize{
     clear: both;
+    margin-top: 60px!important;
 }
 
-#upload-finalize{
+#upload-finalize, #upload-box-button{
     clear: both;
     width: 100%;
     background-color: #ccc;
@@ -133,10 +149,20 @@
     text-align: center;
     font-size: 20px;
     cursor: pointer;
+    margin: 10px 0px;
 }
 
-#upload-finalize:hover{
-    background-color: #00d564;
+#upload-finalize:hover, #upload-box-button:hover{
+    background-color: #58001a;
+}
+
+#upload-basket-button{
+	display:none;
+}
+
+#upload-basket{
+	overflow: hidden;
+	padding-bottom: 20px;
 }
 
 #page-upload-left{
@@ -146,6 +172,7 @@
 }
 
 #page-upload-left.thumb-big{
+	width: 40%;
     min-width: 300px;
 }
 
@@ -155,9 +182,24 @@
     float: left;
 }
 
+#page-upload-right.thumb-big{
+	width: 60%;
+    min-width: 300px;
+    float: left;
+    position:relative;
+}
+
+#page-smile-container{
+	width: 300px;
+    right: 20px;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
 #upload-box{
-    height: 600px;
-    overflow-y: scroll;
+	background-color: #fff;
+	min-height:400px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
 #page-sitemap-wrapper{
@@ -167,11 +209,13 @@
 #page-sitemap-container{
     padding-bottom: 8px;
     padding-top: 8px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    background-color:#eee;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
 #page-content-wrapper{
     padding: 20px;
+    overflow: hidden;
 }
 
 .sitemap-bullet{
@@ -185,7 +229,7 @@
 }
 
 .sitemap-bullet.active{
-    background: #00d564;
+    background: #58001a;
     color: white;
 }
 

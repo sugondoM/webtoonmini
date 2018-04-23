@@ -4,25 +4,25 @@
         <div id="page-list-series" class="fixed">
             <div id="section-list-left">
                 <div class="line-list-add">
-                    <a href="{{url('adminupload/'.$series->id)}}">
+                    <a href="{{url('admin/episode/add/'.$series->id)}}">
                         Upload New Episodes
                     </a>
                 </div>
                 <div id="line-list-container">
                 
-                @foreach ($episodes as $serie)
+                @foreach ($episodes as $episode)
                         <div class="line-list-item">
-                            <a href="{{url('admineditepisode/'.$serie->series_id."/".$serie->id)}}">
+                            <a href="{{url('admin/episode/edit/'.$episode->id)}}">
                     
                             <div class="image">
-                                <img src="/{{$serie->thumbnail_url}}" height="70" width="70">
+                                <img src="/{{$episode->thumbnail_url}}" height="70" width="70">
                             </div>
-                            <div class="title">Ep. {{$serie->episode_number}} - {{$serie->episode_title}}</div>
+                            <div class="title">Ep. {{$episode->episode_number}} - {{$episode->episode_title}}</div>
                             </a>
                             <div class="button-container">
-                                <a href="{{url('admineditepisode/'.$serie->id."/".$serie->id)}}" ><div class="edit">Edit
+                                <a href="{{url('admin/episode/edit/'.$episode->id)}}" ><div class="edit">Edit
                                 </div></a>
-                                <a href="{{url('admineditepisode/'.$serie->id."/".$serie->id)}}"><div class="delete">Delete
+                                <a href="{{url('admin/episode/dodelete/'.$episode->id)}}"><div class="delete">Delete
                                 </div></a>
                             </div>
                         </div>

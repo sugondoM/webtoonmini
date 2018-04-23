@@ -7,53 +7,80 @@
     <div class="sitemap-item"><div class="sitemap-bullet active">2</div><div class="sitemap-desc">Episodes</div></div>
     </div>
 </div>
+<div id="container">
 <div id="page-content-wrapper">
-<form action="{{url('/adminuploadepisode')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('/admin/episode/doadd')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" name="series_id" value="{{$series_id}}">
     <input type="hidden" id="upload-count-total" name="file_count_total" value="1">
     <div id="page-upload-left">
         <h3 class="page-section-header">Thumbnail</h3>
         <div class="thumbnail-image-container">
-            <img class="thumbnail-image-priview" id="thumbnail-image" height="200" width="200">
-           
-            <p>Select Image to upload</p>
+        	@if (Session::get('thumbnail_url') != null)
+        	    <img class="thumbnail-image-priview" id="thumbnail-image" height="200" width="200" src="/{{Session::get('thumbnail_url')}}" >
+        	    <input type="hidden" name="prev-url" value="{{Session::get('thumbnail_url')}}"/>
+        	@else
+        		<img class="thumbnail-image-priview" id="thumbnail-image" height="200" width="200" >
+        		<p>Select Image to upload</p>
+        	@endif         
         </div>
         <input class="thumbnail-image-button" id="thumbnail-file" type="file" name="thumbnail">
         <p class="page-section-info">Recommended size is 160px*151px and must less than 500KB. Only JPG format is allowed</p>
+        @if ($errors->has('thumbnail_url'))
+          		<div class="error">{{ $errors->first('thumbnail_url') }}</div>
+          		
+        @endif
     </div>
     <div id="page-upload-right">
         <h3 class="page-section-header">Episode Title</h3>
-        <input type="text" value="" placeholder="Less Than 50 Character" name="episode_title"/>
+        <input type="text" value="{{old('episode_title')}}" placeholder="Less Than 50 Character" name="episode_title" class="custom-inputtext width-500"/>
+        @if ($errors->has('episode_title'))
+          		<div class="error">{{ $errors->first('episode_title') }}</div>
+        @endif
+        <h3 class="page-section-header">Episode Pages</h3>
+        <div id="upload-box-button">
+            Select Images
+            
+        </div>
         <div id="upload-box">
             <div id="upload-basket">
-            <div class="upload-item"  id="upload-item-1">
-                <div class="upload-cancel-button" id="upload-cancel-1">x</div>                
-                <div class="upload-image-container" id="upload-priview-1">
-                    <img class="upload-image-priview" id="upload-image-1" height="200">
-                    
-                </div>
-                <input class="upload-image-button" id="upload-file-1" type="file" name="photo[]">
-                <div class="upload-number-container">
-                    <label>Page</label>
-                    <input class="upload-page-number" id="upload-number-1" type="text" name="pageNumber[]" value="1">
-                </div>
+            	
             </div>
-
-            </div>
-            <div id="add-new-file"><div class="icon-container add"></div></div>
          </div>
+         @if (Session::get('error_no_page') != null)
+          		<div class="error">{{ Session::get('error_no_page') }}</div>
+         @endif
+         <input class="upload-basket-button" id="upload-basket-button" type="file" name="photo[]" accept="image/x-png,image/gif,image/jpeg" multiple>
+         
          <div id="upload-finalize">
             Upload
             
         </div>
         <button id="submit-button" type="submit" value="submit">Test</button>
+        @if ($errors->any())
+         <div class="list-error-container">
+    		<div class="error">
+           @foreach($errors->all() as $error)
+           		{{$error}}
+           		<br/>
+           @endforeach
+            </div>
+            </div>
+        @endif
     </div>
     
 </form>
 </div>
+</div>
 @endsection
 
 @section('contentjs')
-    
+    @if (Session::get('success_message') != null)
+    	<script>
+		$(document).ready(function () {
+    		alert("{{Session::get('success_message')}}");
+		});
+    	</script>
+    @endif
+ 
 @endsection

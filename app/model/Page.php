@@ -11,8 +11,29 @@ class Page extends Model
     protected $fillable = [
         'page_number', 
         'file_url',
-        'chapter_id'
+        'episode_id'
     ];
+    
+    protected $rules = array(
+        "page_number"  => "required|numeric",
+        "file_url"     => "required",
+        "episode_id"   => "required",
+    );
+    
+    protected $messages = array (
+        "page_number.required"   => "Page number must be filled",
+        "page_number.numeric"    => "Page number must be numeric",
+        "file_url.required"      => "File url must be filled",
+        "episode_id.required"    => "Episode id must be filled",
+    );
+    
+    public function getRules(){
+        return $this->rules;
+    }
+    
+    public function getMessages(){
+        return $this->messages;
+    }
     
     public function episode()
     {

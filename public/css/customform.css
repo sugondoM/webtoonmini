@@ -48,7 +48,7 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-input[type=text].custom-inputtext{
+input[type=text].custom-inputtext,input[type=password].custom-inputtext {
     padding: 6px 20px;
     box-sizing: border-box;
     border: 1px solid #ccc;
@@ -76,14 +76,14 @@ textarea{
     width: 500px;
 }
 button.custom-button{
-    background-color: #00d564; /* Green */
+    background-color: #58001a; /* Green */
     border: none;
     color: white;
-    font-weight: bold;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 20px 0px;
+   	cursor:pointer;
 }

@@ -1,33 +1,33 @@
-@extends('header')
+@include('admin.partials.header')
 
-@section('title', 'Admin')
-
-@section('content')
-<div class="content">
-    <div id="banner">   
-    </div>
+	<div class="page-main-wrapper">
+		<div class="content">
+            
+            {{ Form::open(array('url' => 'admin/dologin')) }}
+            <h1>Login</h1>
+        
+            <!-- if there are login errors, show them here -->
+            <p>
+                {{ $errors->first('username') }}
+                {{ $errors->first('password') }}
+            </p>
+        
+            <p>
+                {{ Form::label('username', 'Username') }}
+                {{ Form::text('username') }}
+            </p>
+        
+            <p>
+                {{ Form::label('password', 'Password') }}
+                {{ Form::password('password') }}
+            </p>
+        
+            <p>{{ Form::submit('Submit!') }}</p>
+            {{ Form::close() }}
+        </div>    
     
-    {{ Form::open(array('url' => 'login')) }}
-    <h1>Login</h1>
 
-    <!-- if there are login errors, show them here -->
-    <p>
-        {{ $errors->first('username') }}
-        {{ $errors->first('password') }}
-    </p>
-
-    <p>
-        {{ Form::label('username', 'Username') }}
-        {{ Form::text('username') }}
-    </p>
-
-    <p>
-        {{ Form::label('password', 'Password') }}
-        {{ Form::password('password') }}
-    </p>
-
-    <p>{{ Form::submit('Submit!') }}</p>
-    {{ Form::close() }}
-</div>
-@endsection
-
+@include('admin.partials.footer')
+@yield('contentjs')
+@include('admin.partials.javascripts')
+@include('admin.partials.end')

@@ -1,10 +1,8 @@
 @include('admin.partials.header')
+@include('admin.partials.topbar')
 
-<div id="container">
-        @include('admin.partials.sidebar')
-    <div class="page-main-wrapper">
+	<div class="page-main-wrapper">
         @yield('content')
-    </div>
     
     
 

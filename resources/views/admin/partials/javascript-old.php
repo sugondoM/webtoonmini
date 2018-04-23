@@ -128,53 +128,35 @@
         /*if the user clicks anywhere outside the select box,
         then close all select boxes:*/
         document.addEventListener("click", closeAllSelect); 
-		$('#upload-box-button').click(function(){
-			$('#upload-basket-button').val(''); 
-			$('#upload-basket-button').click();
-			
-		});
-        $('#upload-basket-button').change(function(){
-        	addImagesPreview(this);
-        });
-
-        function addImagesPreview(input){
-            console.log(input);
-        	  if (input.files) {
-            	  for(i=0;i<input.files.length;i++){
-            		  file_count = i+1;
-            		  
-            		  
-            		  var append_div = '<div class="upload-item" id="upload-item-'+file_count+'">'
-                      +'<div class="upload-image-container" id="upload-priview-'+file_count+'" >'
-                      +'<img class="upload-image-priview"  id="upload-image-'+file_count+'" width="150">'
-                      +'</div>'
-                      +'<div class="upload-number-container">'
-                      +'<label for="pageNumber[]">Name: '+input.files[i].name+'</label><br/>'
-                      +'<label for="pageNumber[]">Page: '+file_count+'</label>'
-                      +'<input class="upload-page-number" type="hidden" name="pageNumber[]" value="'+file_count+'">'
-                      +'</div></div>';
-
-                      
-
-                      
-  					  $("#upload-basket").append(append_div);  
-
-  					  addSourceImage(input.files[i], file_count);  
-                  }
-    		  }
-        }
-
-        function addSourceImage(input, file_count){
-        	var reader = new FileReader();
-
-            reader.onload = function(e) {
-              $('#upload-image-'+file_count).attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input);
-        }
     });
 
+    $(document.body).on("change", ".upload-image-button", function () {
+        var id = this.id;
+        var id_number = id.split("-");
+        
+        console.log(id);
+        
+        if ($('#upload-file-' + id_number[2])[0].files && $('#upload-file-' + id_number[2])[0].files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#upload-image-' + id_number[2]).attr('src', e.target.result);
+            }
+            reader.readAsDataURL($('#upload-file-' + id_number[2])[0].files[0]);
+        } else {
+            $('#upload-image-' + id_number[2]).attr('src', '');
+        }
+
+    });
+    
+    $(document.body).on("click", ".upload-image-container", function () {
+        var id = this.id;
+        var id_number = id.split("-");
+        
+        console.log(id);
+        
+        $("#upload-file-"+ id_number[2]).click();
+
+    });
     
     $(document.body).on("click", ".upload-cancel-button", function () {
         var id = this.id;

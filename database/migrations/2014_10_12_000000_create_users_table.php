@@ -16,10 +16,15 @@ class CreateUsersTable extends Migration
         Schema::create('USER', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username',45);
-            $table->string('avatar_url',600);
-            $table->string('email',45);
+            $table->string('nickname',45)->nullable();
             $table->string('password');
-            $table->string('type',10);
+            $table->string('avatar_url',600)->nullable();
+            $table->string('about',600)->nullable();
+            $table->string('email',45);
+            $table->string('facebook_url',100)->nullable();
+            $table->string('twitter_url',100)->nullable();
+            $table->string('ig_url',100)->nullable();
+            $table->string('google_url',100)->nullable();
             $table->date('created_at');
             $table->date('updated_at');
             $table->boolean('deleted');
@@ -30,6 +35,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('series_title',45);
             $table->string('author',45);
+            $table->integer('genre');
             $table->string('thumbnail_url',600);
             $table->string('banner_url',600);
             $table->string('summary',600);
@@ -42,9 +48,12 @@ class CreateUsersTable extends Migration
         
         Schema::create('GALLERY', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('file_url',150);
-            $table->integer('type');
-            $table->integer('series_id');
+            $table->string('item_name');
+            $table->string('item_url',150);
+            $table->integer('item_type');
+            $table->integer('price')->nullable();
+            $table->string('illustrator',50)->nullable();
+            $table->string('series_name')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
         });
@@ -69,6 +78,41 @@ class CreateUsersTable extends Migration
             $table->date('updated_at');
         });
         
+        Schema::create('ADS', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('ads_name',45);
+            $table->string('ads_links',600);
+            $table->string('ads_portrait_url',600);
+            $table->string('ads_landscape_url',600);
+            $table->date('created_at');
+            $table->date('updated_at');
+        });
+        
+        Schema::create('BANNER', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('banner_name',45);
+            $table->string('banner_links',600);
+            $table->string('banner_url',600);
+            $table->string('banner_page',45);
+            $table->date('created_at');
+            $table->date('updated_at');
+        });
+        
+        Schema::create('PAYMENT_METHOD', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('payment_name',45);
+            $table->string('description',600);
+            $table->date('created_at');
+            $table->date('updated_at');
+        });
+        
+        Schema::create('CATEGORY', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('category_name',45);
+            $table->date('created_at');
+            $table->date('updated_at');
+        });
+        
     }
 
     /**
@@ -82,6 +126,10 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('SERIES');
         Schema::dropIfExists('GALLERY');
         Schema::dropIfExists('EPISODE');
-        Schema::dropIfExists('PAGE');      
+        Schema::dropIfExists('PAGE');    
+        Schema::dropIfExists('ADS');
+        Schema::dropIfExists('BANNER');
+        Schema::dropIfExists('PAYMENT_METHOD');
+        Schema::dropIfExists('CATEGORY');
     }
 }
