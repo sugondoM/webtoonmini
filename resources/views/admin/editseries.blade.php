@@ -22,8 +22,14 @@
             <h3 class="page-section-header">Thumbnail</h3>
             <div class="thumbnail-image-container">
                 <p></p>
-                <img class="thumbnail-image-priview" id="thumbnail-image" src="/{{old('thumbnail_url', $series->thumbnail_url)}}" height="200" width="200">
+                 @if (Session::get('thumbnail_url') != null)
+            	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" height="200" width="200" />
+        	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
+            	@else
+               	 <img class="thumbnail-image-priview" id="thumbnail-image" src="/{{old('thumbnail_url', $series->thumbnail_url)}}" height="200" width="200">
                 <input type="hidden" name="prev_url" value="{{old('thumbnail_url',$series->thumbnail_url)}}"/>
+                @endif
+               
             </div>
             <input class="thumbnail-image-button" id="thumbnail-file" type="file" name="thumbnail"/>
             <p class="page-section-info">Recommended size is 160px*151px and must less than 500KB. Only JPG format is allowed</p>
@@ -60,8 +66,15 @@
                 <h3 class="page-section-header">Banner</h3>
                 <div class="banner-image-container">
                     <p></p>
-                    <img class="banner-image-priview" id="banner-image" src="/{{old('banner_url' , $series->banner_url)}}">
+                    @if (Session::get('thumbnail_url') != null)
+                	<img class="thumbnail-image-priview" id="banner-image" src="/{{Session::get('banner_url')}}" height="200" width="200" />
+            	    <input type="hidden" name="prev_banner_url" value="{{Session::get('banner_url')}}"/>
+                	@else
+                   	<img class="banner-image-priview" id="banner-image" src="/{{old('banner_url' , $series->banner_url)}}">
                     <input type="hidden" name="prev_banner_url" value="{{ old('banner_url' , $series->banner_url)}}"/>
+                    @endif
+                    
+                   
                 </div>
                 <input class="banner-image-button" id="banner-file" type="file" name="banner"/>
                 <p>Recommended size is not defined. Only JPG format is allowed</p>

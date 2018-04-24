@@ -1,5 +1,9 @@
 @extends('admin.layouts.master')
 @section('content')
+<div id="page-sitemap-wrapper">
+
+</div>
+<div id="container">
     <div id="page-content-wrapper">
         <div id="page-list-series">
         @foreach ($series as $serie)
@@ -42,6 +46,7 @@
            
         @endforeach
         </div>
+    </div>
     </div>
 @endsection
 

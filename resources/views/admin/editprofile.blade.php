@@ -15,8 +15,13 @@
             <h3 class="page-section-header">Thumbnail*</h3>
             <div class="thumbnail-image-container">
                 <p></p>
-                <img class="thumbnail-image-priview" id="thumbnail-image"  src="/{{ old('avatar_url' , $user->avatar_url)}}" height="200" width="200"/>
+                @if (Session::get('avatar_url') != null)
+            	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{Session::get('avatar_url')}}" height="200" width="200" />
+        	    <input type="hidden" name="prev_avatar_url" value="{{Session::get('avatar_url')}}"/>
+            	@else
+               	<img class="thumbnail-image-priview" id="thumbnail-image"  src="/{{ old('avatar_url' , $user->avatar_url)}}" height="200" width="200"/>
                 <input type="hidden" name="prev_avatar_url" value="{{ old('avatar_url' , $user->avatar_url)}}"/>
+                @endif
             </div>
             <input class="thumbnail-image-button" id="thumbnail-file" type="file" name="thumbnail"/>
             <p class="page-section-info"></p>

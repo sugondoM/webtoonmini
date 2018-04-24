@@ -18,7 +18,7 @@
         <div class="thumbnail-image-container">
         	@if (Session::get('thumbnail_url') != null)
         	    <img class="thumbnail-image-priview" id="thumbnail-image" height="200" width="200" src="/{{Session::get('thumbnail_url')}}" >
-        	    <input type="hidden" name="prev-url" value="{{Session::get('thumbnail_url')}}"/>
+        	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
         	@else
         		<img class="thumbnail-image-priview" id="thumbnail-image" height="200" width="200" >
         		<p>Select Image to upload</p>

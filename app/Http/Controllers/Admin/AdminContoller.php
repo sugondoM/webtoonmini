@@ -13,9 +13,9 @@
     use App\model\Episode;
     use App\model\Page;
     use Log;
-use App\model\Category;
-use app\model\Gallery;
-use App\preference\AdminPreference;
+    use App\model\Category;
+    use App\model\Gallery;
+    use App\preference\AdminPreference;
                                                     
     class AdminController extends Controller
     {
@@ -179,7 +179,19 @@ use App\preference\AdminPreference;
         
         public function doEditGalleryItem(Request $request)
         {
+            $gallery = new Gallery();
+            $inputGallery = $this->galleryHandler($request);
+            if ($this->myValidate($inputGallery, $gallery->getRules(), $gallery->getMessages(), [])) {
+                
+                
+            } else {
+                return Redirect::back()->withErrors($this->errorValidation)
+                ->withInput(Input::all())
+                ->with('thumbnail_url'  , $inputGallery['item_url']);
+            }
             
+            $updateGallery = Gallery::whereId($request['id'])->update($inputGallery);
+            return redirect("/admin/gallery");
         }
         
         public function doLogout()
@@ -203,6 +215,11 @@ use App\preference\AdminPreference;
         public function doDeleteEpisode($episode){
             $pages = Page::where('episode_id',$episode)->delete();
             $episodes = Episode::where('id',$episode)->delete();
+            return Redirect::back();
+        }
+        
+        public function doDeleteGalleryItem($item){
+            $pages = Gallery::where('id',$item)->delete();
             return Redirect::back();
         }
         
@@ -293,7 +310,19 @@ use App\preference\AdminPreference;
         
         public function doUploadGalleryItem(Request $request)
         {
+            $gallery = new Gallery();
+            $inputGallery = $this->galleryHandler($request);
             
+            if ($this->myValidate($inputGallery, $gallery->getRules(), $gallery->getMessages(), [])) {
+                
+                
+            } else {
+                return Redirect::back()->withErrors($this->errorValidation)
+                ->withInput(Input::all())
+                ->with('thumbnail_url'  , $inputGallery['item_url']);
+            }
+            $gallery = Gallery::create($inputGallery);
+            return Redirect::back()->with('success_message' , 'Gallery item have been added');
         }
         
         public function showProfile()
@@ -367,38 +396,39 @@ use App\preference\AdminPreference;
         public function showGallery()
         {
             
-            /* $galleriesItems = Gallery::orderBy('created_date', 'asc')
+            $galleriesItems = Gallery::orderBy('created_at', 'asc')
             ->get();
             $sortedItems=[];
-            $item1 = [];
-            $item2 = [];
-            $item3 = [];
-            $item4 = [];
+            $character = [];
+            $skecth = [];
+            $illustration = [];
+            $shop = [];
             
             foreach ($galleriesItems as $item){
                 switch ($item['item_type']){
                     case AdminPreference::$indexCharacterSheet : 
-                        array_push($item1, $item);
+                        array_push($character, $item);
                         break;
                     case AdminPreference::$indexSketch :
-                        array_push($item2, $item);
+                        array_push($skecth, $item);
                         break;
                     case AdminPreference::$indexIllustration :
-                        array_push($item3, $item);
+                        array_push($illustration, $item);
                         break;
                     case AdminPreference::$indexShopItem :
-                        array_push($item4, $item);
+                        array_push($shop, $item);
                         break;
                 }
             }
-             */
             
             
-            return view('admin.gallery');
+            return view('admin.gallery', compact('character','skecth','illustration','shop'));
         }
         
-        public function showEditGallery($itemid){
-            
+        public function showEditGalleryItem($itemid){
+            $item = Gallery::where('id',$itemid)
+            ->first();
+            return view('admin.editgalleryitem', compact('item'));
         }
         
         public function showUploadGallery(){
@@ -509,11 +539,12 @@ use App\preference\AdminPreference;
         public function galleryHandler($request){
             $inputGallery = [];
             $path_item = "";
-            $destinationPath = "";
+            $directoryName = "";
             $thumbnail_url = "";
+            $item_type = "";
             $filtered_title = str_replace(" ","_",$request['item_name']);
             
-            switch ($item['item_type']){
+            switch ($request['item_type']){
                 case AdminPreference::$indexCharacterSheet :
                     $path_item = AdminPreference::$stringCharacterSheet;
                     break;
@@ -527,7 +558,7 @@ use App\preference\AdminPreference;
                     $path_item = AdminPreference::$stringShopItem;
                     break;
             }
-            $destinationPath = 'uploads_gallery/'.$path_item;
+            $directoryName = 'uploads_gallery/'.$path_item."/";
             
             if($request['prev_url']!=null){
                 $thumbnail_url = $request['prev_url'];
@@ -535,29 +566,33 @@ use App\preference\AdminPreference;
             
             if ($request['thumbnail'] != null) {
                 $photo = $request['thumbnail'];
-                $filename = $photo->getClientOriginalName();
+                $filename = $filtered_title.'_'.$photo->getClientOriginalName();
                 $thumbnail_url = $directoryName.$filename;
                 $photo->move($directoryName,$filename);
             }
             
+            if ($request['item_type'] != 0) {
+                $item_type = $request['item_type'];
+            }
             
             $inputGallery['item_name'] = $request['item_name'];
             $inputGallery['item_url'] = $thumbnail_url;
-            $inputGallery['item_type'] = $request['item_type'];
+            $inputGallery['item_type'] = $item_type;
             $inputGallery['price'] = $request['price'];
             $inputGallery['illustrator'] = $request['illustrator'];
             $inputGallery['series_name'] = $request['series_name'];
+            
+            return $inputGallery;
         }
         
         public function bannerHandler($request){
             $inputBanner = [];
-            $path_item = "";
-            $destinationPath = "";
+            $directoryName = "";
             $thumbnail_url = "";
             $filtered_title = str_replace(" ","_",$request['banner_name']);
             
             
-            $destinationPath = 'uploads_gallery/'.$path_item;
+            $directoryName = 'uploads_gallery/';
             
             if($request['prev_url']!=null){
                 $thumbnail_url = $request['prev_url'];
@@ -565,18 +600,59 @@ use App\preference\AdminPreference;
             
             if ($request['thumbnail'] != null) {
                 $photo = $request['thumbnail'];
-                $filename = $photo->getClientOriginalName();
+                $filename = $filtered_title.'_'.$photo->getClientOriginalName();
                 $thumbnail_url = $directoryName.$filename;
                 $photo->move($directoryName,$filename);
             }
             
             
-            $inputGallery['item_name'] = $request['item_name'];
-            $inputGallery['item_url'] = $thumbnail_url;
-            $inputGallery['item_type'] = $request['item_type'];
-            $inputGallery['price'] = $request['price'];
-            $inputGallery['illustrator'] = $request['illustrator'];
-            $inputGallery['series_name'] = $request['series_name'];
+            $inputBanner['banner_name'] = $request['banner_name'];
+            $inputBanner['banner_link'] = $request['banner_link'];
+            $inputBanner['banner_url']  = $thumbnail_url;
+            $inputBanner['banner_page'] = $request['banner_page'];
+            
+            return $inputBanner;
+        }
+        
+        public function adsHandler($request){
+            $inputAds = [];
+            $directoryName = "";
+            $thumbnail_url = "";
+            $portrait_url = "";
+            $filtered_title = str_replace(" ","_",$request['ads_name']);
+            
+            $directoryName = 'uploads_gallery/';
+            
+            if($request['prev_url']!=null){
+                $thumbnail_url = $request['prev_url'];
+            }
+            
+            if ($request['thumbnail'] != null) {
+                $photo = $request['thumbnail'];
+                $filename = $filtered_title;
+                $thumbnail_url = $directoryName.$filename.'_'.$photo->getClientOriginalName();;
+                $photo->move($directoryName,$filename);
+            }
+            
+            if($request['prev_portrait_url']!=null){
+                $portrait_url = $request['prev_portrait_url'];
+            }
+            
+            if ($request['portrait'] != null) {
+                $photo = $request['portrait'];
+                $filename2 = "portrait_".$filtered_title;
+                $portrait_url = $directoryName.$filename2.'_'.$photo->getClientOriginalName();;
+                $photo->move($directoryName,$filename2);
+            }
+            
+            
+            $inputAds['ads_name'] = $request['ads_name'];
+            $inputAds['ads_link'] = $request['ads_link'];
+            $inputAds['ads_portrait_url']  = $portrait_url;
+            $inputAds['ads_landscape_url']  = $thumbnail_url;
+            $inputAds['ads_active'] = $request['ads_active'];
+            
+            return $inputAds;
         }
         
         public function checkLogin(){

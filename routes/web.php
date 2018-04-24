@@ -47,7 +47,8 @@ Route::put('/admin/episode/doedit',                  'Admin\AdminController@doEd
 Route::post('/admin/episode/doadd',                  'Admin\AdminController@doUploadEpisode');
 Route::post('/admin/series/doadd',                   'Admin\AdminController@doUploadSeries');
 Route::put('/admin/profile/doedit',                  'Admin\AdminController@doEditProfile');
-Route::put('/admin/gallery/doedit',                  'Admin\AdminController@doEditGalleryItem');
+Route::put('/admin/gallery/doedit',           'Admin\AdminController@doEditGalleryItem');
+Route::get('/admin/gallery/dodelete/{item}',          'Admin\AdminController@doDeleteGalleryItem');
 Route::post('/admin/gallery/doadd',                  'Admin\AdminController@doUploadGalleryItem');
 Route::get('/admin/login',                           'Admin\AdminController@showLoginPage');
 Route::post('/admin/dologin',                        'Admin\AdminController@doLogin');

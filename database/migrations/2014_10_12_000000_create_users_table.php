@@ -84,6 +84,7 @@ class CreateUsersTable extends Migration
             $table->string('ads_links',600);
             $table->string('ads_portrait_url',600);
             $table->string('ads_landscape_url',600);
+            $table->tinyInteger('ads_active');
             $table->date('created_at');
             $table->date('updated_at');
         });

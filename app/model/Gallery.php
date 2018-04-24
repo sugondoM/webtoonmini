@@ -20,7 +20,7 @@ class Gallery extends Model
         "item_name"     => "required",
         "item_url"      => "required",
         "item_type"     => "required",
-        "price"         => "numeric",
+        "price"         => "nullable|numeric",
     );
     
     protected $messages = array (

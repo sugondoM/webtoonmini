@@ -59,6 +59,11 @@
         <a href = "{{url('/admin/gallery/add')}}" class="menu-button @if(Request::path() == 'admin/gallery/add') active @endif">
         	Add Item
         </a>
+        @if(Request::is('admin/gallery/edit/*'))
+        <a href = "#" class="menu-button active"> 
+        	Edit Item
+        </a>
+        @endif 
     </div>
      @endif
 </div>

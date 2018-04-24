@@ -22,8 +22,15 @@
     <div id="page-upload-left">
         <h3 class="page-section-header">Thumbnail</h3>
         <div class="thumbnail-image-container">
-            <img class="thumbnail-image-priview" id="thumbnail-image" src="/{{old('thumbnail_url' , $episodes->thumbnail_url)}}" height="200" width="200">
-                <input type="hidden" name="prev_url" value="{{old('thumbnail_url' , $episodes->thumbnail_url)}}"/>
+        
+        	@if (Session::get('thumbnail_url') != null)
+        	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" height="200" width="200" />
+    	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
+        	@else
+           	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{old('thumbnail_url' , $episodes->thumbnail_url)}}" height="200" width="200">
+            <input type="hidden" name="prev_url" value="{{old('thumbnail_url' , $episodes->thumbnail_url)}}"/>
+            @endif
+            
             <p></p>
         </div>
         <input class="thumbnail-image-button" id="thumbnail-file" type="file" name="thumbnail">

@@ -9,14 +9,6 @@
 </div>
 <div id="container">
 <div id="page-content-wrapper">
-{{--@if ($errors->any())
-		<div class="error">
-       @foreach($errors->all() as $error)
-       		{{$error}}
-       		<br/>
-       @endforeach
-        </div>
-@endif--}}
 <form action="{{url('/admin/series/doadd')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" id="upload-count-total" name="file-count-total" value="1">
@@ -88,6 +80,16 @@
           		<div class="error">{{ $errors->first('summary') }}</div>
         	@endif
             <button id="submit-button1" type="submit" value="submit" class="custom-button width-500">Upload Series</button>
+             @if ($errors->any())
+             <div class="list-error-container">
+        		<div class="error">
+               @foreach($errors->all() as $error)
+               		{{$error}}
+               		<br/>
+               @endforeach
+                </div>
+                </div>
+            @endif
         </div>
     </div>
     
