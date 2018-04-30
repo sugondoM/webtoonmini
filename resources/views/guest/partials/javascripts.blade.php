@@ -9,6 +9,18 @@
                 scrollTop: $("#pages-container-"+id_number[2]).offset().top
             }, 2000);
         });
+
+        $(".page-thumbnail-intro").click(function() {
+        	$('.page-thumbnail-wrapper').animate({
+                scrollTop: $(".page-thumbnail-ending").offset().top
+            }, 1000);
+        });
+
+        $(".page-thumbnail-ending").click(function() {
+        	$('.page-thumbnail-wrapper').animate({
+                scrollTop: $(".page-thumbnail-intro").offset().top
+            }, 1000);
+        });
         
         $(".burger-menu").click(function(){
             if($(this).hasClass('active')){

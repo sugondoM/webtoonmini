@@ -10,4 +10,3 @@
 @include('guest.partials.footer')
 @yield('contentjs')
 @include('guest.partials.javascripts')
-@include('guest.partials.end')

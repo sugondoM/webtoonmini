@@ -48,6 +48,41 @@
         </div>
     </div>
     </div>
+    @if($page['total_paging']>1)
+    			
+    	 <div class="theme-bg-color-1">
+    	 	<div class="page-paging-container theme-bg-color-1 theme-paging">
+    	 		
+    			@php
+    				$page_prev = $page['current_paging']-1;
+    				$page_next = $page['current_paging']+1;
+    			@endphp
+    			@if($page_prev > 0)
+    			<a href="/admin/series/list/{{$page_prev}}" class="prev">
+    			<div >
+    				< prev
+    			</div>
+    			</a>
+    			@endif
+    			@for($i=0;$i<$page['iteration'];$i++)
+    				<a href="/admin/series/list/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+    				<div class="page-paging-number-container">
+    					{{$page['start_paging']+$i}}
+    				</div>
+    				</a>
+    			@endfor
+    			@if($page_next < $page['total_paging'])
+    			<a href="/admin/series/list/{{$page_next}}" class="next">
+    			<div>
+    				next >
+    			</div>
+    			</a>
+    			@endif
+    		</div>
+    	 </div>
+   	@endif
+   	
+
 @endsection
 
 @section('contentjs')

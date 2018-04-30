@@ -73,8 +73,18 @@
           		<div class="error">{{ $errors->first('banner_url') }}</div>
           		@endif
             </div>
+            <h3 class="page-section-header">Recommend</h3>
+            <div class="custom-select width-500">
+            <select name="recommend" >
+                <option value=0>Select Genre</option>
+                <option value=1>Yes</option>
+                <option value=0>No</option>
+            </select>
+            </div>
+            <h3 class="page-section-header">Recommend Order</h3>
+            <input type="text" value="{{old('recommend_order')}}" placeholder="" name="recommend_order" class="custom-inputtext width-500"/>
             <h3 class="page-section-header">Summary</h3>
-            <textarea placeholder="Less Than 500 Character" value="" rows="10" cols="60" name="summary" class="width-80-500"></textarea>
+            <textarea placeholder="Less Than 500 Character"  rows="10" cols="60" name="summary" class="width-80-500">{{old('summary')}}</textarea>
             <br/>
             @if ($errors->has('summary'))
           		<div class="error">{{ $errors->first('summary') }}</div>

@@ -17,10 +17,12 @@ class Gallery extends Model
     ];
     
     protected $rules = array(
-        "item_name"     => "required",
-        "item_url"      => "required",
+        "item_name"     => "required|max:50",
+        "item_url"      => "required|max:600",
         "item_type"     => "required",
         "price"         => "nullable|numeric",
+        "illustrator"   => "nullable|max:50",
+        "series_name"   => "nullable|max:50"
     );
     
     protected $messages = array (

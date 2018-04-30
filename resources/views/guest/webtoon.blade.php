@@ -3,22 +3,29 @@
 
 @section('title', 'Webtoon')
 
-<div id="page-main-wrapper">
+
 @section('content')
-    @foreach($series as $serie)
-        @php 
+<div id="page-main-wrapper" class="theme-main-wrapper">
+	@php 
             $index = 0
-        @endphp
+    @endphp
+    @foreach($series as $serie)
+        
         {{-- @for($i=0;$i<5;$i++)--}}
         @if($index % 2 == 0)
-            <div id="page-recommend-wrapper" class="first-color">
+            <div class="page-recommend-wrapper theme-bg-color-1">
+        		<div class="page-recommend-container theme-bg-color-2">
         @else
-            <div id="page-recommend-wrapper" class="second-color">    
+            <div class="page-recommend-wrapper theme-bg-color-2">    
+            	<div class="page-recommend-container theme-bg-color-1">
         @endif
-
-                <div class="recommend-container">
-                    <a href="/webtoon/series/{{$serie->id}}">
+                
+                    <a href="/series/{{str_replace(' ', '_', $serie->series_title)}}">
                         <div class="recomend-image" style="background: url('/{{$serie->banner_url}}')">
+                        </div>
+                        <div class="recommend-detail">
+                        	<p class="recommend-title theme-title-sublime">{{$serie->series_title}}</p>
+                        	<p class="recommend-subtitle theme-subtitle-sublime">By: {{$serie->author}}</p>
                         </div>
                     </a>
                 </div>
@@ -28,7 +35,65 @@
         @endphp
     {{--@endfor--}}
     @endforeach
-</div>
+    
+    @while($index<10)
+        @if($index % 2 == 0)
+            <div class="page-recommend-wrapper theme-bg-color-1">
+            	 <div class="page-recommend-container theme-bg-color-2">
+        @else
+            <div class="page-recommend-wrapper second-color theme-bg-color-2">  
+            	 <div class="page-recommend-container theme-bg-color-1">  
+        @endif
+
+               
+                  
+                </div>
+            </div>
+        @php 
+            $index++;
+        @endphp
+    @endwhile
+    
+    @if($page['total_paging']>1)
+    			
+    @if($index % 2 == 0)
+    	 <div class="theme-bg-color-1">
+    	 	<div class="page-paging-container theme-bg-color-2 theme-paging">
+    	 		
+    @else
+    	 <div class="theme-bg-color-2">
+    	 	<div class="page-paging-container theme-bg-color-1 theme-paging">
+    @endif
+    		
+    			@php
+    				$page_prev = $page['current_paging']-1;
+    				$page_next = $page['current_paging']+1;
+    			@endphp
+    			@if($page_prev > 0)
+    			<a href="/webtoon/list/{{$page_prev}}" class="prev">
+    			<div >
+    				< prev
+    			</div>
+    			</a>
+    			@endif
+    			@for($i=0;$i<$page['iteration'];$i++)
+    				<a href="/webtoon/list/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+    				<div class="page-paging-number-container">
+    					{{$page['start_paging']+$i}}
+    				</div>
+    				</a>
+    			@endfor
+    			@if($page_next < $page['total_paging'])
+    			<a href="/webtoon/list/{{$page_next}}" class="next">
+    			<div>
+    				next >
+    			</div>
+    			</a>
+    			@endif
+    		</div>
+    	 </div>
+   	@endif
+
 @endsection
 
                             

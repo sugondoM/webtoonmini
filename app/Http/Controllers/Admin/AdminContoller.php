@@ -16,7 +16,10 @@
     use App\model\Category;
     use App\model\Gallery;
     use App\preference\AdminPreference;
-                                                    
+use App\model\Banner;
+use App\model\Ads;
+use App\model\SitePage;
+                                                                                                    
     class AdminController extends Controller
     {
         private $errorValidation;
@@ -56,10 +59,10 @@
                 //dd($userdata);
                 //dd(Auth::attempt($userdata));
                 if (Auth::attempt($userdata)) {
-                    echo 'SUCCESS!';
-                    //return Redirect::to('admin');
+                    
+                    return Redirect::to('admin');
                 } else {  
-                    echo 'Asiii!';
+                    return Redirect::to('admin/login');
                     
                 }
             }
@@ -194,6 +197,40 @@
             return redirect("/admin/gallery");
         }
         
+        public function doEditBannerItem(Request $request)
+        {
+            $banner = new Banner();
+            $inputBanner = $this->bannerHandler($request);
+            
+            if ($this->myValidate($inputBanner, $banner->getRules(), $banner->getMessages(), [])) {
+                
+            } else {
+                return Redirect::back()->withErrors($this->errorValidation)
+                ->withInput(Input::all())
+                ->with('thumbnail_url'  , $inputBanner['banner_url']);
+            }
+            $updateBanner = Banner::whereId($request['id'])->update($inputBanner);
+            return redirect("/admin/adsbanner");
+        }
+        
+        public function doEditAdsItem(Request $request)
+        {
+            
+            $ads = new Ads();
+            $inputAds = $this->adsHandler($request);
+            
+            if ($this->myValidate($inputAds, $ads->getRules(), $ads->getMessages(), [])) {
+                
+            } else {
+                return Redirect::back()->withErrors($this->errorValidation)
+                ->withInput(Input::all())
+                ->with('thumbnail_url'  , $inputAds['ads_portrait_url'])
+                ->with('banner_url'  , $inputAds['ads_landscape_url']);
+            }
+            $updateAds = Ads::whereId($request['id'])->update($inputAds);
+            return redirect("/admin/adsbanner");
+        }
+        
         public function doLogout()
         {
             Auth::logout();
@@ -236,8 +273,8 @@
             } else {
                 return Redirect::back()->withErrors($this->errorValidation)
                     ->withInput(Input::all())
-                    ->with('thumbnail_url'  , $thumbnail_url)
-                    ->with('banner_url'     , $banner_url);
+                    ->with('thumbnail_url'  , $inputSeries['thumbnail_url'])
+                    ->with('banner_url'     , $inputSeries['banner_url']);
             }
             $series = Series::create($inputSeries);
             $insertedId = $series->id;
@@ -325,6 +362,39 @@
             return Redirect::back()->with('success_message' , 'Gallery item have been added');
         }
         
+        public function doUploadBannerItem(Request $request)
+        {
+            $banner = new Banner();
+            $inputBanner = $this->bannerHandler($request);
+            
+            if ($this->myValidate($inputBanner, $banner->getRules(), $banner->getMessages(), [])) {
+                
+            } else {
+                return Redirect::back()->withErrors($this->errorValidation)
+                ->withInput(Input::all())
+                ->with('thumbnail_url'  , $inputBanner['banner_url']);
+            }
+            $banner = Banner::create($inputBanner);
+            return Redirect::back()->with('success_message' , 'Banner item have been added');
+        }
+        
+        public function doUploadAdsItem(Request $request)
+        {
+            $ads = new Ads();
+            $inputAds = $this->adsHandler($request);
+            
+            if ($this->myValidate($inputAds, $ads->getRules(), $ads->getMessages(), [])) {
+                
+            } else {
+                return Redirect::back()->withErrors($this->errorValidation)
+                ->withInput(Input::all())
+                ->with('thumbnail_url'  , $inputAds['ads_portrait_url'])
+                ->with('banner_url'  , $inputAds['ads_landscape_url']);
+            }
+            $ads = Ads::create($inputAds);
+            return Redirect::back()->with('success_message' , 'Advertising item have been added');
+        }
+        
         public function showProfile()
         {
             
@@ -349,8 +419,22 @@
             return view('admin.uploadepisode')->with('series_id', $series);
         }
         
-        public function showSeriesList()
+        public function showUploadBanner()
         {
+            $pages = SitePage::get();
+            return view('admin.uploadbanneritem',compact('pages'));
+        }
+        
+        public function showUploadAds()
+        {
+            return view('admin.uploadadsitem');
+        }
+        
+        public function showSeriesList($paging=1)
+        {
+            $number = $paging - 1;
+            $offset = $number * 30;
+            
             $series = Series::join(
                 'category',
                 'category.id','=','series.genre'
@@ -358,22 +442,40 @@
                ->orderBy('series.series_title', 'asc')
                ->get(['series.*','category.category_name as category_name']);
             
+               
+           $totalItem = Series::count();
+           $totalPaging = $totalItem / 30;
+           if($number > $totalPaging) {
+               abort(404);
+           }
+           $page = $this->getPagination($paging, $totalPaging, 10, 5);
             //dd($series);
-            return view('admin.listseries',compact('series'));
+            return view('admin.listseries',compact('series','page'));
         }
         
-        public function showEpisodesList($series)
+        public function showEpisodesList($series,$paging=1)
         {
+            $number = $paging - 1;
+            $offset = $number * 30;
+            
             $episodes = Episode::where('series_id', $series)
                ->orderBy('episode_number', 'asc')
                ->get();
             
+               
+           $totalItem = Episode::where('series_id', $series)->count();
+           $totalPaging = $totalItem / 30;
+           if($number > $totalPaging) {
+               abort(404);
+           }
+           $page = $this->getPagination($paging, $totalPaging, 10, 5);
+           
             $series = Series::where('id', $series)
                ->orderBy('id', 'asc')
                ->first();
             
             
-            return view('admin.listepisode',compact('series','episodes'));
+            return view('admin.listepisode',compact('series','episodes','page'));
         }
            
         public function showEditSeries($series)
@@ -393,11 +495,23 @@
             return view('admin.editepisode',compact('episodes'));
         }
         
-        public function showGallery()
+        public function showGallery($paging=1)
         {
+            $number = $paging - 1;
+            $offset = $number * 30;
             
             $galleriesItems = Gallery::orderBy('created_at', 'asc')
+            ->offset($offset)
+            ->limit(30)
             ->get();
+            
+            $totalItem = Gallery::count();
+            $totalPaging = $totalItem / 30;
+            if($number > $totalPaging) {
+                abort(404);
+            }
+            $page = $this->getPagination($paging, $totalPaging, 10, 5);
+            
             $sortedItems=[];
             $character = [];
             $skecth = [];
@@ -422,7 +536,7 @@
             }
             
             
-            return view('admin.gallery', compact('character','skecth','illustration','shop'));
+            return view('admin.gallery', compact('character','skecth','illustration','shop', 'page'));
         }
         
         public function showEditGalleryItem($itemid){
@@ -432,7 +546,52 @@
         }
         
         public function showUploadGallery(){
-            return view('admin.uploadgalleryitem',compact('episodes','pages'));
+            return view('admin.uploadgalleryitem');
+        }
+        
+        public function showBanner($paging=1){
+            $number = $paging - 1;
+            $offset = $number * 30;
+            $banner = Banner::offset($offset)
+            ->limit(30)
+            ->get();
+            
+            $totalItem = Banner::count();
+            $totalPaging = $totalItem / 30;
+            if($number > $totalPaging) {
+                abort(404);
+            }
+            $page = $this->getPagination($paging, $totalPaging, 10, 5);
+            
+            return view('admin.banner', compact('banner','page'));
+        }
+        
+        public function showAds($paging=1){
+            $number = $paging - 1;
+            $offset = $number * 30;
+            $ads = Ads::offset($offset)
+            ->limit(30)
+            ->get();
+            $totalItem = Ads::count();
+            $totalPaging = $totalItem / 30;
+            if($number > $totalPaging) {
+                abort(404);
+            }
+            $page = $this->getPagination($paging, $totalPaging, 10, 5);
+            return view('admin.ads', compact('ads','page'));
+        }
+        
+        public function showEditBannerItem($itemid){
+            $pages = SitePage::get();
+            $item = Banner::where('id',$itemid)
+            ->first();
+            return view('admin.editbanneritem', compact('item','pages'));
+        }
+        
+        public function showEditAdsItem($itemid){
+            $item = Ads::where('id',$itemid)
+            ->first();
+            return view('admin.editadsitem', compact('item'));
         }
         
         public function myValidate($data, $rules, $messages, $custom)
@@ -490,6 +649,8 @@
             $inputSeries['author']          = $request['author'];
             $inputSeries['genre']           = $genre;
             $inputSeries['summary']         = $request['summary'];
+            $inputSeries['recommend']       = $request['recommend'];
+            $inputSeries['recommend_order'] = $request['recommend_order'];
             $inputSeries['deleted']         = false;
             $inputSeries['user_id']         = 1;
             
@@ -607,7 +768,7 @@
             
             
             $inputBanner['banner_name'] = $request['banner_name'];
-            $inputBanner['banner_link'] = $request['banner_link'];
+            $inputBanner['banner_links'] = $request['banner_links'];
             $inputBanner['banner_url']  = $thumbnail_url;
             $inputBanner['banner_page'] = $request['banner_page'];
             
@@ -620,7 +781,7 @@
             $thumbnail_url = "";
             $portrait_url = "";
             $filtered_title = str_replace(" ","_",$request['ads_name']);
-            
+            $activation = "";
             $directoryName = 'uploads_gallery/';
             
             if($request['prev_url']!=null){
@@ -629,30 +790,62 @@
             
             if ($request['thumbnail'] != null) {
                 $photo = $request['thumbnail'];
-                $filename = $filtered_title;
-                $thumbnail_url = $directoryName.$filename.'_'.$photo->getClientOriginalName();;
+                $filename ="portrait_".$filtered_title.'_'.$photo->getClientOriginalName();
+                $thumbnail_url = $directoryName.$filename;
                 $photo->move($directoryName,$filename);
             }
             
-            if($request['prev_portrait_url']!=null){
-                $portrait_url = $request['prev_portrait_url'];
+            
+            
+            if($request['prev_banner_url']!=null){
+                $portrait_url = $request['prev_banner_url'];
             }
             
-            if ($request['portrait'] != null) {
-                $photo = $request['portrait'];
-                $filename2 = "portrait_".$filtered_title;
-                $portrait_url = $directoryName.$filename2.'_'.$photo->getClientOriginalName();;
+            if ($request['banner'] != null) {
+                $photo = $request['banner'];
+                $filename2 = "portrait_".$filtered_title.'_'.$photo->getClientOriginalName();
+                $portrait_url = $directoryName.$filename2;
                 $photo->move($directoryName,$filename2);
             }
             
+            if($request['ads_active'] != 0){
+                if($request['ads_active']==2){
+                    $activation = 0;
+                }else{
+                    $activation = 1;
+                }
+            }
             
             $inputAds['ads_name'] = $request['ads_name'];
-            $inputAds['ads_link'] = $request['ads_link'];
-            $inputAds['ads_portrait_url']  = $portrait_url;
-            $inputAds['ads_landscape_url']  = $thumbnail_url;
-            $inputAds['ads_active'] = $request['ads_active'];
+            $inputAds['ads_links'] = $request['ads_links'];
+            $inputAds['ads_portrait_url']  = $thumbnail_url;
+            $inputAds['ads_landscape_url']  = $portrait_url;
+            $inputAds['ads_active'] = $activation;
             
             return $inputAds;
+        }
+        
+        public function getPagination($currentPage, $totalPaging, $batchPaging, $median){
+            $paging = [];
+            if ( ($currentPage - $median) <= 0) {
+                $startPage = 1;
+            } else {
+                $startPage = $currentPage-$median;
+            }
+            if($totalPaging > $batchPaging && ($totalPaging - $currentPage) >= $batchPaging){
+                $iteration = $batchPaging;
+            }else if($totalPaging > $batchPaging && ($totalPaging - $currentPage) < $batchPaging){
+                $iteration = $totalPaging - $startPage;
+            }else if($totalPaging < $batchPaging){
+                $iteration = $totalPaging;
+            }
+            
+            $paging["start_paging"] = $startPage;
+            $paging["iteration"] = $iteration;
+            $paging["total_paging"] = $totalPaging;
+            $paging["current_paging"] = $currentPage;
+            
+            return $paging;
         }
         
         public function checkLogin(){

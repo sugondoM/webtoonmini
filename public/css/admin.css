@@ -116,6 +116,7 @@ html,body {
 
 #page-footer p{
 	line-height:40px;
+	margin:0px;
 }
 
 .page-sidebar-block{
@@ -437,8 +438,66 @@ p.page-section-info{
 	width: 226px;
 	display:inline-block;
 	margin:0px 5px;
+	    overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .no-flow{
     overflow: hidden;
+}
+
+.login-form{
+	
+    width: 640px;
+    margin: auto;
+    height: 300px;
+    background-color: #fff;
+    margin-top: 200px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4), 0 2px 10px 0 rgba(0,0,0,0.12);
+    padding: 20px;
+    position:relative;
+    
+}
+.login-form h1,.login-form  label{
+	color: #58001a;
+}
+.login-form  label{
+	width:90px;
+	display:inline-block;
+}
+.login-form input[type='submit']{
+	margin-left: auto;
+    margin-right: 10px;
+    right: 16px;
+    position: absolute;
+}
+
+.page-paging-container{
+	width: 100%;
+    margin: auto;
+	text-align: center;
+	height: 50px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	    background-color: #58001a;
+}
+
+.page-paging-container a{
+	height: 24px;
+    line-height: 50px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    width: 26px;
+    color: #fff;
+}
+
+.page-paging-container a.active, .page-paging-container a:hover{
+	color: #000;
+}
+
+
+.page-paging-container a.next, .page-paging-container a.prev{
+	width: 60px;
 }

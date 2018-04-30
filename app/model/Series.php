@@ -13,17 +13,20 @@ class Series extends Model
         'banner_url',
         'genre',
         'summary',
+        'recommend',
+        'recommend_order',
         'user_id',
         'deleted',
     ];
     
     protected $rules = array(
-        "series_title"  => "required",
-        "author"        => "required",
+        "series_title"  => "required|max:50",
+        "author"        => "required|max:50",
         "genre"         => "required",
-        "thumbnail_url" => "required",
-        "banner_url"    => "required",
-        "summary"       => "required",
+        "thumbnail_url" => "required|max:600",
+        "banner_url"    => "required|max:600",
+        "recommend_order" => "nullable|numeric",
+        "summary"       => "required|max:600",
     );
     
     protected $messages = array (
@@ -31,8 +34,10 @@ class Series extends Model
         "author.required"           => "Author name must be filled",
         "genre.required"            => "Genre name must be choosen",
         "thumbnail_url.required"    => "Thumbnail image must be choosen",
+        "recommend_order"           => "Recommend order can only be number",
         "banner_url.required"       => "Banner image must be choosen",
         "summary.required"          => "Summary must be filled",
+        "summary.max"               => "Maximum character is 600",
     );
     
     public function getRules(){

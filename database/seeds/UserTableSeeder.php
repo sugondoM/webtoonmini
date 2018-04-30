@@ -4,6 +4,7 @@ use App\model\Category;
 use App\model\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\model\SitePage;
 
 class UserTableSeeder extends Seeder
 {
@@ -56,6 +57,20 @@ class UserTableSeeder extends Seeder
 		    DB::table('CATEGORY')->delete();
 		    foreach($categories as $category){
 		        Category::create($category);
+		    }
+		    
+		    $sites = [
+		        ['page_name' => 'all'],
+		        ['page_name' => 'main'],
+		        ['page_name' => 'webcomic'],
+		        ['page_name' => 'shop'],
+		        ['page_name' => 'donate'],
+		        ['page_name' => 'recommendation'],
+		      
+		    ];
+		    DB::table('SITEPAGE')->delete();
+		    foreach($sites as $site){
+		        SitePage::create($site);
 		    }
 		   
 	}

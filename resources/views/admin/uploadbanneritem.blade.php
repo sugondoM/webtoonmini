@@ -5,12 +5,12 @@
 </div>
 <div id="container">
 <div id="page-content-wrapper">
-<form action="{{url('admin/gallery/doadd')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('admin/banner/doadd')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" id="upload-count-total" name="file-count-total" value="1">
     <div id="page-upload-left" class="thumb-big">
         <div id="page-smile-container">
-            <h3 class="page-section-header">Gallery Item</h3>
+            <h3 class="page-section-header">Banner Image</h3>
             <div class="thumbnail-image-container big">
             	@if (Session::get('thumbnail_url') != null)
             	<img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" >
@@ -30,30 +30,28 @@
     </div>
     <div id="page-upload-right" class="thumb-big">
         <div id="page-smale-container">
-            <h3 class="page-section-header">Item Name</h3>
-            <input type="text" value="{{old('item_name')}}" placeholder="Less Than 50 Character" name="item_name" class="custom-inputtext width-500"/>
-            @if ($errors->has('item_name'))
-          		<div class="error">{{ $errors->first('episode_title') }}</div>
+            <h3 class="page-section-header">Banner Name</h3>
+            <input type="text" value="{{old('banner_name')}}" placeholder="Less Than 50 Character" name="banner_name" class="custom-inputtext width-500"/>
+            @if ($errors->has('banner_name'))
+          		<div class="error">{{ $errors->first('banner_name') }}</div>
         	@endif
-            <h3 class="page-section-header">Type</h3>
+            <h3 class="page-section-header">Banner Link</h3>
+            <input type="text" value="{{old('banner_links')}}" placeholder="Less Than 50 Character" name="banner_links" class="custom-inputtext width-500"/>
+            @if ($errors->has('banner_links'))
+          		<div class="error">{{ $errors->first('banner_links') }}</div>
+        	@endif
+            <h3 class="page-section-header">Banner Page</h3>
             <div class="custom-select width-500">
-            <select name="item_type" >
-                <option value="0">Select Item Type</option>
-                <option value="1">Character</option>
-                <option value="2">Sketch</option>
-                <option value="3">Illustration</option>
-                <option value="4">Shop</option>
+            <select name="banner_page" >
+                <option value=0>Select Page</option>
+                @foreach($pages as $page)
+                <option value="{{$page['page_name']}}">{{$page['page_name']}}</option>
+                @endforeach
             </select>
             </div>
-            @if ($errors->has('item_type'))
-          		<div class="error">{{ $errors->first('item_type') }}</div>
+            @if ($errors->has('genre'))
+          		<div class="error">{{ $errors->first('genre') }}</div>
         	@endif
-            <h3 class="page-section-header">Illustrator</h3>
-            <input type="text" value="{{old('illustrator')}}" placeholder="Less Than 50 Character" name="illustrator" class="custom-inputtext width-500"/>
-            <h3 class="page-section-header">Series Name</h3>
-            <input type="text" value="{{old('series_name')}}" placeholder="Less Than 50 Character" name="series_name" class="custom-inputtext width-500"/>
-            <h3 class="page-section-header">Price</h3>
-            <input type="text" value="{{old('price')}}" placeholder="Less Than 50 Character" name="price" class="custom-inputtext width-500"/>
             <br/>
             <button id="submit-button1" type="submit" value="submit" class="custom-button width-500">Upload Item</button>
             @if ($errors->any())

@@ -1,12 +1,12 @@
 @extends('guest.layouts.master')
 
 
-@section('title', 'Donate')
+@section('title', 'Episode')
 
 
 @section('content')
-<div id="page-main-wrapper">
-    <div id="page-mini-header">
+<div id="page-main-wrapper" class="theme-main-wrapper">
+    <div id="page-mini-header" class="theme-topbar">
         <div id="left-episode">{{$episodes->episode_title}}</div> 
         <div id="center-episode"> Episode {{$episodes->episode_number}} </div>
     </div>
@@ -20,7 +20,12 @@
         </div>
         <div id="disqus_thread"></div>
     </div>
-    <div id="page-thumbnail-container">
+    <div id="page-thumbnail-container" class="theme-bg-light hidden">
+    	<div class="page-thumbnail-fold theme-bg-color-header ">
+    		<i class="arrow left"></i>
+    	</div>
+    	<div class="page-thumbnail-wrapper">
+    	<div class="thumb-filler theme-bg-color-header"></div>
         @foreach($pages as $page)
             <div class="thumb-container" id="thumb-item-{{$page->page_number}}">
                 <div class="thumb-image">
@@ -31,12 +36,30 @@
                 </span>
             </div>
         @endforeach
-        <div style="height: 200px;"></div>
+        <div class="thumb-filler-2 theme-bg-color-header"></div>
+        </div>
+        
+        
     </div>
-</div>
+
 @endsection
 
-
+@section('contentjs')
+<script>
+		$(document).ready(function () {
+			console.log("cumi-cumi  ass");
+           $(".page-thumbnail-fold").click(function(){
+               console.log("cumi-cumi");
+                if($("#page-thumbnail-container").hasClass("hidden")){
+					$("#page-thumbnail-container").removeClass("hidden");
+                }else{
+					$("#page-thumbnail-container").addClass("hidden");
+                    
+                }
+           });
+        });
+	
+</script>
 
 <script>
 
@@ -56,6 +79,9 @@ s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script>
+
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 <script id="dsq-count-scr" src="//localhost-ebn011krih.disqus.com/count.js" async></script>
+@endsection
+

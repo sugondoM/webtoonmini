@@ -12,4 +12,11 @@ class AdminPreference {
     public static $stringSketch = "sketch";
     public static $stringIllustration = "illustration";
     public static $stringShopItem = "shopuitem";
+    
+    public static $stringAllPage = "all";
+    public static $stringMainPage = "main";
+    public static $stringWebCominPage = "webcomic";
+    public static $stringShopPage = "shop";
+    public static $stringDonatePage = "donate";
+    public static $stringRecommendPage = "Recommendation";
 }

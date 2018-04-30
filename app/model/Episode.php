@@ -17,8 +17,8 @@ class Episode extends Model
     
     protected $rules = array(
         "episode_number"  => "required|numeric",
-        "episode_title"  => "required",
-        "thumbnail_url"   => "required",
+        "episode_title"  => "required|max:50",
+        "thumbnail_url"   => "required|max:600",
         "series_id"       => "required",
     );
     

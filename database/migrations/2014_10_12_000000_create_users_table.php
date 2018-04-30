@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('nickname',45)->nullable();
             $table->string('password');
             $table->string('avatar_url',600)->nullable();
-            $table->string('about',600)->nullable();
+            $table->text('about',600)->nullable();
             $table->string('email',45);
             $table->string('facebook_url',100)->nullable();
             $table->string('twitter_url',100)->nullable();
@@ -39,6 +39,8 @@ class CreateUsersTable extends Migration
             $table->string('thumbnail_url',600);
             $table->string('banner_url',600);
             $table->string('summary',600);
+            $table->integer('recommend')->nullable();
+            $table->integer('recommend_order')->nullable();
             $table->integer('total_view')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
@@ -114,6 +116,13 @@ class CreateUsersTable extends Migration
             $table->date('updated_at');
         });
         
+        
+        Schema::create('SITEPAGE', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('page_name',45);
+            $table->date('created_at');
+            $table->date('updated_at');
+        });
     }
 
     /**
@@ -132,5 +141,6 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('BANNER');
         Schema::dropIfExists('PAYMENT_METHOD');
         Schema::dropIfExists('CATEGORY');
+        Schema::dropIfExists('SITEPAGE');
     }
 }

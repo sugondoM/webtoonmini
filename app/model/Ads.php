@@ -5,27 +5,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ads extends Model
 {
-    public $table = "BANNER";
+    public $table = "ADS";
     
     protected $fillable = [
         'ads_name',
-        'ads_link',
+        'ads_links',
         'ads_portrait_url',
         'ads_landscape_url',
         'ads_active'
     ];
     
     protected $rules = array(
-        "ads_name"          => "required",
-        "ads_link"          => "required",
-        "ads_portrait_url"  => "required",
-        "ads_lanscape_url"  => "required",
+        "ads_name"          => "required|max:50",
+        "ads_links"          => "required|max:600",
+        "ads_portrait_url"  => "required|max:600",
+        "ads_landscape_url"  => "required|max:600",
         "ads_active"        => "required"
     );
     
     protected $messages = array (
         "ads_name.required"             => "Advertising name must be filled",
-        "ads_link.required"             => "Advertising link must be filled",
+        "ads_links.required"             => "Advertising link must be filled",
         "ads_portrait_url.required"     => "Advertising portrait image must be selected",
         "ads_landscape_url.required"    => "Advertising landscape image must be selected",
         "ads_active"                    => "Advertising status need to be selected"

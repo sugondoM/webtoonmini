@@ -50,7 +50,7 @@
           		<div class="error">{{ $errors->first('password_confirmation') }}</div>
         	@endif
             <h3 class="page-section-header">About</h3>
-            <textarea placeholder="Less Than 500 Character" rows="10" cols="60" name="about" class="width-80-500"></textarea>
+            <textarea placeholder="Less Than 500 Character" rows="10" cols="60" name="about" class="width-80-500">{{$user->about}}</textarea>
             <h3 class="page-section-header">Email*</h3>
             <input type="text" value="{{old('email' , $user->email)}}" placeholder="Less Than 50 Character" name="email" class="custom-inputtext width-500"/>
             @if ($errors->has('email'))

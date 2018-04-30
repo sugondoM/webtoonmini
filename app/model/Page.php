@@ -16,7 +16,7 @@ class Page extends Model
     
     protected $rules = array(
         "page_number"  => "required|numeric",
-        "file_url"     => "required",
+        "file_url"     => "required|max:600",
         "episode_id"   => "required",
     );
     
