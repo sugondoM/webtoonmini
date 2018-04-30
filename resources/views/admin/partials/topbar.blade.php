@@ -10,7 +10,7 @@
         <a href = "{{url('/admin/gallery/list')}}" class="menu-button  @if(Request::is('admin/gallery/*')||Request::is('admin/gallery')) active @endif">
         	Gallery
         </a>
-        <a href = "{{url('/admin/banner')}}" class="menu-button  @if(Request::is('admin/banner')||Request::is('admin/ads')||Request::is('admin/banner/*')||Request::is('admin/ads/*')) active @endif">
+        <a href = "{{url('/admin/banner/list')}}" class="menu-button  @if(Request::is('admin/banner')||Request::is('admin/ads')||Request::is('admin/banner/*')||Request::is('admin/ads/*')) active @endif">
         	Banner Ads
         </a>
         <a href = "{{url('/admin/dologout')}}" class="menu-button logout-button">
