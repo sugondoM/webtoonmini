@@ -194,7 +194,7 @@ use App\model\SitePage;
             }
             
             $updateGallery = Gallery::whereId($request['id'])->update($inputGallery);
-            return redirect("/admin/gallery");
+            return redirect("/admin/gallery/list");
         }
         
         public function doEditBannerItem(Request $request)
@@ -210,7 +210,7 @@ use App\model\SitePage;
                 ->with('thumbnail_url'  , $inputBanner['banner_url']);
             }
             $updateBanner = Banner::whereId($request['id'])->update($inputBanner);
-            return redirect("/admin/adsbanner");
+            return redirect("/admin/banner/list");
         }
         
         public function doEditAdsItem(Request $request)
@@ -228,7 +228,7 @@ use App\model\SitePage;
                 ->with('banner_url'  , $inputAds['ads_landscape_url']);
             }
             $updateAds = Ads::whereId($request['id'])->update($inputAds);
-            return redirect("/admin/adsbanner");
+            return redirect("/admin/ads/list");
         }
         
         public function doLogout()
@@ -549,8 +549,8 @@ use App\model\SitePage;
             return view('admin.uploadgalleryitem');
         }
         
-        public function showBanner($paging=1){
-            $number = $paging - 1;
+        public function showBanner($pageNo=1){
+            $number = $pageNo - 1;
             $offset = $number * 30;
             $banner = Banner::offset($offset)
             ->limit(30)
@@ -561,13 +561,13 @@ use App\model\SitePage;
             if($number > $totalPaging) {
                 abort(404);
             }
-            $page = $this->getPagination($paging, $totalPaging, 10, 5);
+            $page = $this->getPagination($pageNo, $totalPaging, 10, 5);
             
             return view('admin.banner', compact('banner','page'));
         }
         
-        public function showAds($paging=1){
-            $number = $paging - 1;
+        public function showAds($pageNo=1){
+            $number = $pageNo - 1;
             $offset = $number * 30;
             $ads = Ads::offset($offset)
             ->limit(30)
@@ -577,7 +577,7 @@ use App\model\SitePage;
             if($number > $totalPaging) {
                 abort(404);
             }
-            $page = $this->getPagination($paging, $totalPaging, 10, 5);
+            $page = $this->getPagination($pageNo, $totalPaging, 10, 5);
             return view('admin.ads', compact('ads','page'));
         }
         

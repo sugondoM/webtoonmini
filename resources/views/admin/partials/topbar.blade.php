@@ -7,7 +7,7 @@
         <a href = "{{url('/admin/series/list')}}" class="menu-button @if(Request::is('admin/series')||Request::is('admin')||Request::is('admin/series/*')||Request::is('admin/episode/*')) active @endif"> 
         	Series
         </a>
-        <a href = "{{url('/admin/gallery')}}" class="menu-button  @if(Request::is('admin/gallery/*')||Request::is('admin/gallery')) active @endif">
+        <a href = "{{url('/admin/gallery/list')}}" class="menu-button  @if(Request::is('admin/gallery/*')||Request::is('admin/gallery')) active @endif">
         	Gallery
         </a>
         <a href = "{{url('/admin/banner')}}" class="menu-button  @if(Request::is('admin/banner')||Request::is('admin/ads')||Request::is('admin/banner/*')||Request::is('admin/ads/*')) active @endif">
@@ -56,7 +56,7 @@
     @endif
     @if(Request::is('admin/gallery')||Request::is('admin/gallery/*'))
     <div class="sub-header" id="sub_header_gallery">
-        <a href = "{{url('/admin/gallery')}}" class="menu-button @if(Request::is('admin/gallery')) active @endif"> 
+        <a href = "{{url('/admin/gallery/list')}}" class="menu-button @if(Request::is('admin/gallery/list')||Request::is('admin/gallery/list/*')) active @endif"> 
         	List Item
         </a>
         <a href = "{{url('/admin/gallery/add')}}" class="menu-button @if(Request::path() == 'admin/gallery/add') active @endif">
@@ -71,10 +71,10 @@
      @endif
      @if(Request::is('admin/banner') || Request::is('admin/ads') || Request::is('admin/banner/*') || Request::is('admin/ads') || Request::is('admin/ads/*'))
      <div class="sub-header" id="sub_header_gallery">
-        <a href = "{{url('/admin/banner')}}" class="menu-button @if(Request::is('admin/banner')) active @endif"> 
+        <a href = "{{url('/admin/banner/list')}}" class="menu-button @if(Request::is('admin/banner')) active @endif"> 
         	Banner
         </a>
-        <a href = "{{url('/admin/ads')}}" class="menu-button @if(Request::is('admin/ads')) active @endif"> 
+        <a href = "{{url('/admin/ads/list')}}" class="menu-button @if(Request::is('admin/ads')) active @endif"> 
         	Ads
         </a>
         <a href = "{{url('/admin/banner/add')}}" class="menu-button @if(Request::path() == 'admin/banner/add') active @endif">

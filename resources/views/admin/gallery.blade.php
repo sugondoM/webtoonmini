@@ -133,21 +133,21 @@
     				$page_next = $page['current_paging']+1;
     			@endphp
     			@if($page_prev > 0)
-    			<a href="/admin/gallery/{{$page_prev}}" class="prev">
+    			<a href="/admin/gallery/list/{{$page_prev}}" class="prev">
     			<div >
     				< prev
     			</div>
     			</a>
     			@endif
     			@for($i=0;$i<$page['iteration'];$i++)
-    				<a href="/admin/gallery/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+    				<a href="/admin/gallery/list/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
     				<div class="page-paging-number-container">
     					{{$page['start_paging']+$i}}
     				</div>
     				</a>
     			@endfor
     			@if($page_next < $page['total_paging'])
-    			<a href="/admin/gallery/{{$page_next}}" class="next">
+    			<a href="/admin/gallery/list/{{$page_next}}" class="next">
     			<div>
     				next >
     			</div>
