@@ -16,10 +16,10 @@
             <div class="thumbnail-image-container">
                 <p></p>
                 @if (Session::get('avatar_url') != null)
-            	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{Session::get('avatar_url')}}" height="200" width="200" />
+            	<img class="thumbnail-image-priview" id="thumbnail-image" src="{{asset(Session::get('avatar_url'))}}" height="200" width="200" />
         	    <input type="hidden" name="prev_avatar_url" value="{{Session::get('avatar_url')}}"/>
             	@else
-               	<img class="thumbnail-image-priview" id="thumbnail-image"  src="/{{ old('avatar_url' , $user->avatar_url)}}" height="200" width="200"/>
+               	<img class="thumbnail-image-priview" id="thumbnail-image"  src="{{asset($user->avatar_url)}}" height="200" width="200"/>
                 <input type="hidden" name="prev_avatar_url" value="{{ old('avatar_url' , $user->avatar_url)}}"/>
                 @endif
             </div>

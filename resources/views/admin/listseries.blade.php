@@ -10,7 +10,7 @@
             <div class="box-list-item">
                 <div class="top-link">
                 <a href="{{url('admin/episode/list/'.$serie->id)}}">
-                    <img src="/{{$serie->thumbnail_url}}" alt="" width="138" height="138">
+                    <img src="{{asset($serie->thumbnail_url)}}" alt="" width="138" height="138">
                     <p class="genre">{{ucfirst($serie->category_name)}}</p>
                     
                     <div class="info">
@@ -58,21 +58,25 @@
     				$page_next = $page['current_paging']+1;
     			@endphp
     			@if($page_prev > 0)
-    			<a href="/admin/series/list/{{$page_prev}}" class="prev">
+    			<a href="{{url('/admin/series/list/'.$page_prev)}}" class="prev">
     			<div >
     				< prev
     			</div>
     			</a>
     			@endif
+    			
     			@for($i=0;$i<$page['iteration'];$i++)
-    				<a href="/admin/series/list/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+    				@php
+    					$currentPage = $page['start_paging']+$i;
+    				@endphp
+    				<a href="{{url('/admin/series/list/'.$currentPage)}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
     				<div class="page-paging-number-container">
     					{{$page['start_paging']+$i}}
     				</div>
     				</a>
     			@endfor
     			@if($page_next < $page['total_paging'])
-    			<a href="/admin/series/list/{{$page_next}}" class="next">
+    			<a href="url('/admin/series/list/'.$page_next)}}" class="next">
     			<div>
     				next >
     			</div>

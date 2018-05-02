@@ -14,10 +14,10 @@
             <h3 class="page-section-header">Banner Image</h3>
             <div class="thumbnail-image-container big">
             	@if (Session::get('thumbnail_url') != null)
-            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" >
+            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="{{asset(Session::get('thumbnail_url'))}}" >
         	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
             	@else
-                <img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{$item->banner_url}}" >
+                <img class="thumbnail-image-priview big" id="thumbnail-image" src="{{asset($item->banner_url)}}" >
         	    <input type="hidden" name="prev_url" value="{{$item->banner_url}}"/>
                 @endif
             </div>

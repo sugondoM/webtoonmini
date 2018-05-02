@@ -7,7 +7,7 @@
 @section('content')
 <div id="page-main-wrapper" class="theme-bg-color-1">
    	<!-- Jssor Slider Begin -->
-   	@include('admin.partials.banner')
+   	@include('guest.partials.banner')
    
     <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;visibility:hidden;">
         <!-- Loading Screen -->
@@ -16,7 +16,7 @@
         </div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">
             @foreach($banners as $banner)
-            	<div><img data-u="image" src="/{{$banner->banner_url}}" /></div>
+            	<div><img data-u="image" src="{{asset($banner->banner_url)}}" /></div>
             @endforeach
         </div>
         <!-- Bullet Navigator -->
@@ -56,7 +56,7 @@
         	@if($i == 1)
         		<div class="banner-link-container">
         	@endif
-        		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-50"><img src="/{{$ad->ads_landscape_url}}"/></div></a>
+        		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-50"><img src="{{asset($ad->ads_landscape_url)}}"/></div></a>
           	@if($i == 2 || count($ads) == $j)
         		</div>
         		 

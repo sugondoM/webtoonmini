@@ -15,7 +15,7 @@
                             <a href="{{url('admin/episode/edit/'.$episode->id)}}">
                     
                             <div class="image">
-                                <img src="/{{$episode->thumbnail_url}}" height="70" width="70">
+                                <img src="{{asset($episode->thumbnail_url)}}" height="70" width="70">
                             </div>
                             <div class="title">Ep. {{$episode->episode_number}} - {{$episode->episode_title}}</div>
                             </a>
@@ -38,7 +38,7 @@
                     <h3>{{$series->series_title}}</h3>
                     <p>{{$series->author}}</p>
                     <p>{{$series->summary}}</p>
-                    <img src="/{{$series->thumbnail_url}}"/>
+                    <img src="{{asset($series->thumbnail_url)}}"/>
                 </div>
             </div>
         </div>
@@ -54,21 +54,25 @@
                 				$page_next = $page['current_paging']+1;
                 			@endphp
                 			@if($page_prev > 0)
-                			<a href="/admin/episode/list/{{$series->id}}/{{$page_prev}}" class="prev">
+                			<a href="{{url('/admin/episode/list/'.$series->id.'/'.$page_prev)}}" class="prev">
                 			<div >
                 				< prev
                 			</div>
                 			</a>
                 			@endif
+                			
                 			@for($i=0;$i<$page['iteration'];$i++)
-                				<a href="/admin/episode/list/{{$series->id}}/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+                				@php
+                					$currentPage = $page['start_paging']+$i;
+                				@endphp
+                				<a href="{{url('/admin/episode/list/'.$series->id.'/'.$currentPage)}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
                 				<div class="page-paging-number-container">
                 					{{$page['start_paging']+$i}}
                 				</div>
                 				</a>
                 			@endfor
                 			@if($page_next < $page['total_paging'])
-                			<a href="/admin/episode/list/{{$series->id}}/{{$page_next}}" class="next">
+                			<a href="{{url('/admin/episode/list/'.$series->id.'/'.$page_next)}}" class="next">
                 			<div>
                 				next >
                 			</div>

@@ -1,0 +1,75 @@
+.theme-bg-color-1{
+	background-color: #f2f2f2;
+}
+
+.theme-bg-color-2{
+	background-color: #dddddd;
+}
+
+.theme-bg-light{
+	background-color: #fff;
+}
+
+.theme-bg-color-header{
+	background-color: #595959;
+}
+
+.theme-topbar{
+	background: #595959;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.theme-topbar a{
+	color: #FFF;
+}
+
+.theme-topbar a.active, .theme-topbar a:hover{
+	color: #dddddd;
+}
+
+.theme-footer{
+	background: #595959;
+    box-shadow: -0px -2px 0px 0 rgba(0,0,0,0.16),-0px -1px 0px 0 rgba(0,0,0,0.12);
+    color:#fff;
+}
+
+.theme-main-wrapper{
+	background-color:  #dddddd;
+}
+
+.theme-paging a{
+	color: #595959;
+}
+
+.theme-paging a.active, .theme-paging a:hover{
+	color: #000;
+}
+
+.theme-title-sublime, .theme-subtitle-sublime{
+	color: #fff;
+}
+
+.theme-border{
+	float: right;
+	width: 160px;
+    height: 40px;
+    text-align: center;
+    
+    line-height: 40px;
+	border-bottom: 40px solid #595959;
+    border-left: 20px solid transparent;
+    clear: both;
+    box-shadow: 0 2px 0px 0 rgba(0,0,0,0.16),0 3px 0px 0 rgba(0,0,0,0.12);
+}
+
+.theme-border a{
+	color: #fff;
+}
+
+.theme-border:hover a, .theme-border.active a{
+	color: #dddddd;
+}
+
+.theme-separator{
+	border-bottom: 1px solid #595959;
+}

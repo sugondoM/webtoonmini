@@ -14,7 +14,7 @@
                     
                     <div class="right-shop">
     		 			<div class="shop-picture">
-    		 				<img src="/{{$item->item_url}}">
+    		 				<img src="{{asset($item->item_url)}}">
     		 			</div>
     			 	</div>
     			 	<div class="left-shop">
@@ -54,21 +54,24 @@
         				$page_next = $page['current_paging']+1;
         			@endphp
         			@if($page_prev > 0)
-        			<a href="/shop/{{$page_prev}}" class="prev">
-        			<div >
+        			<a href="{{url('/shop/'.$page_prev)}}" class="prev">
+        			<div>
         				< prev
         			</div>
         			</a>
         			@endif
         			@for($i=0;$i<$page['iteration'];$i++)
-        				<a href="/shop/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+        				@php
+        					$currentPage = $page['start_paging']+$i;
+        				@endphp
+        				<a href="{{url('/shop/'.$currentPage)}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
         				<div class="page-paging-number-container">
         					{{$page['start_paging']+$i}}
         				</div>
         				</a>
         			@endfor
         			@if($page_next < $page['total_paging'])
-        			<a href="/shop/{{$page_next}}" class="next">
+        			<a href="{{url('/shop/'.$page_next)}}" class="next">
         			<div>
         				next >
         			</div>

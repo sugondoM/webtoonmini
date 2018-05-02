@@ -24,10 +24,10 @@
         <div class="thumbnail-image-container">
         
         	@if (Session::get('thumbnail_url') != null)
-        	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" height="200" width="200" />
+        	<img class="thumbnail-image-priview" id="thumbnail-image" src="{{asset(Session::get('thumbnail_url'))}}" height="200" width="200" />
     	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
         	@else
-           	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{old('thumbnail_url' , $episodes->thumbnail_url)}}" height="200" width="200">
+           	<img class="thumbnail-image-priview" id="thumbnail-image" src="{{asset($episodes->thumbnail_url)}}" height="200" width="200">
             <input type="hidden" name="prev_url" value="{{old('thumbnail_url' , $episodes->thumbnail_url)}}"/>
             @endif
             

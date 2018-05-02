@@ -44,7 +44,7 @@
         	@foreach($items as $item)
             <div class="gallery-box-container">
             <a>
-                <div class="box-thumbnail" id="{{$item->id}}"><img src="/{{$item->item_url}}" height="120"></div>
+                <div class="box-thumbnail" id="{{$item->id}}"><img src="{{asset($item->item_url)}}" height="120"></div>
             </a>
             </div>
             @endforeach
@@ -60,21 +60,24 @@
         				$page_next = $page['current_paging']+1;
         			@endphp
         			@if($page_prev > 0)
-        			<a href="/gallery/{{$pageName}}/{{$page_prev}}" class="prev">
+        			<a href='{{url("/gallery/".$pageName."/".$page_prev)}}' class="prev">
         			<div >
         				< prev
         			</div>
         			</a>
         			@endif
         			@for($i=0;$i<$page['iteration'];$i++)
-        				<a href="/gallery/{{$pageName}}/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+        				@php
+        					$currentPage = $page['start_paging']+$i;
+        				@endphp
+        				<a href='{{url("/gallery/".$pageName."/".$currentPage)}}' @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
         				<div class="page-paging-number-container">
         					{{$page['start_paging']+$i}}
         				</div>
         				</a>
         			@endfor
         			@if($page_next < $page['total_paging'])
-        			<a href="/gallery/{{$pageName}}/{{$page_next}}" class="next">
+        			<a href='{{url("/gallery/".$pageName."/".$page_prev)}}' class="next">
         			<div>
         				next >
         			</div>
@@ -86,7 +89,7 @@
     </div>
     <div id="page-viewgallery-container" class="floating theme-bg-color-1">
         
-        <div id="image-view" style="background: url('/@if(!empty($items[0]->item_url)){{$items[0]->item_url}}@endif');">
+        <div id="image-view" style="background: url('@if(!empty($items[0]->item_url)){{asset($items[0]->item_url)}}@endif');">
             
         </div>
         <div id="description">

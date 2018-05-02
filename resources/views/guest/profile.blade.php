@@ -15,7 +15,7 @@
 		 	
 		 		<div class="right-profile">
 		 			<div class="profile-picture">
-		 				<img src="/{{$profile->avatar_url}}">
+		 				<img src="{{asset($profile->avatar_url)}}">
 		 			</div>
 			 	</div>
 			 	<div class="left-profile">

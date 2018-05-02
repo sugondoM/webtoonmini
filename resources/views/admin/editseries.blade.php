@@ -23,10 +23,10 @@
             <div class="thumbnail-image-container">
                 <p></p>
                  @if (Session::get('thumbnail_url') != null)
-            	<img class="thumbnail-image-priview" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" height="200" width="200" />
+            	<img class="thumbnail-image-priview" id="thumbnail-image" src="{{asset(Session::get('thumbnail_url'))}}" height="200" width="200" />
         	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
             	@else
-               	 <img class="thumbnail-image-priview" id="thumbnail-image" src="/{{old('thumbnail_url', $series->thumbnail_url)}}" height="200" width="200">
+               	 <img class="thumbnail-image-priview" id="thumbnail-image" src="{{asset($series->thumbnail_url)}}" height="200" width="200">
                 <input type="hidden" name="prev_url" value="{{old('thumbnail_url',$series->thumbnail_url)}}"/>
                 @endif
                
@@ -67,10 +67,10 @@
                 <div class="banner-image-container">
                     <p></p>
                     @if (Session::get('thumbnail_url') != null)
-                	<img class="thumbnail-image-priview" id="banner-image" src="/{{Session::get('banner_url')}}" height="200" width="200" />
+                	<img class="thumbnail-image-priview" id="banner-image" src="{{asset(Session::get('banner_url'))}}" height="200" width="200" />
             	    <input type="hidden" name="prev_banner_url" value="{{Session::get('banner_url')}}"/>
                 	@else
-                   	<img class="banner-image-priview" id="banner-image" src="/{{old('banner_url' , $series->banner_url)}}">
+                   	<img class="banner-image-priview" id="banner-image" src="{{asset($series->banner_url)}}">
                     <input type="hidden" name="prev_banner_url" value="{{ old('banner_url' , $series->banner_url)}}"/>
                     @endif
                     

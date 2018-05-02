@@ -13,7 +13,7 @@
             <h3 class="page-section-header">Gallery Item</h3>
             <div class="thumbnail-image-container big">
             	@if (Session::get('thumbnail_url') != null)
-            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" >
+            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="{{asset(Session::get('thumbnail_url'))}}" >
         	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
             	@else
                 <p class="big">Select Image to upload</p>

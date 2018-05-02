@@ -12,7 +12,7 @@
 	@foreach($character as $item)
             <div class="item-wrapper">
             <div class="item">
-                <img src="/{{$item->item_url}}"/>
+                <img src="{{asset($item->item_url)}}"/>
                  
             </div>
             <div class="item-detail">
@@ -40,7 +40,7 @@
     @foreach($skecth as $item)
     		<div class="item-wrapper">
             <div class="item">
-                <img src="/{{$item->item_url}}"/>
+                <img src="{{asset($item->item_url)}}"/>
                  
             </div>
             <div class="item-detail">
@@ -68,7 +68,7 @@
     @foreach($illustration as $item)
             <div class="item-wrapper">
             <div class="item">
-                <img src="/{{$item->item_url}}"/>
+                <img src="{{asset($item->item_url)}}"/>
                  
             </div>
             <div class="item-detail">
@@ -96,7 +96,7 @@
     @foreach($shop as $item)
             <div class="item-wrapper">
             <div class="item">
-                <img src="/{{$item->item_url}}"/>
+                <img src="{{asset($item->item_url)}}"/>
                 
             </div>
             <div class="item-detail">
@@ -133,21 +133,25 @@
     				$page_next = $page['current_paging']+1;
     			@endphp
     			@if($page_prev > 0)
-    			<a href="/admin/gallery/list/{{$page_prev}}" class="prev">
+    			<a href="{{url('/admin/gallery/list/'.$page_prev)}}" class="prev">
     			<div >
     				< prev
     			</div>
     			</a>
     			@endif
+    		
     			@for($i=0;$i<$page['iteration'];$i++)
-    				<a href="/admin/gallery/list/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+    				@php
+    					$currentPage = $page['start_paging']+$i;
+    				@endphp
+    				<a href="{{url('/admin/gallery/list/'.$currentPage)}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
     				<div class="page-paging-number-container">
     					{{$page['start_paging']+$i}}
     				</div>
     				</a>
     			@endfor
     			@if($page_next < $page['total_paging'])
-    			<a href="/admin/gallery/list/{{$page_next}}" class="next">
+    			<a href="{{url('/admin/gallery/list/'.$page_next)" class="next">
     			<div>
     				next >
     			</div>

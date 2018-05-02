@@ -19,8 +19,8 @@
             	<div class="page-recommend-container page-recommend-container theme-bg-color-1">
         @endif
                 
-                    <a href="/series/{{str_replace(' ', '_', $serie->series_title)}}">
-                        <div class="recomend-image" style="background: url('/{{$serie->banner_url}}')">
+                    <a href="{{url('/series/'.str_replace(' ', '_', $serie->series_title))}}">
+                        <div class="recomend-image" style="background: url('{{asset($serie->banner_url)}}')">
                         </div>
                         <div class="recommend-detail">
                         	<p class="recommend-title theme-title-sublime">{{$serie->series_title}}</p>
@@ -68,19 +68,24 @@
     				$page_prev = $page['current_paging']-1;
     				$page_next = $page['current_paging']+1;
     			@endphp
-    			<a href="/recommend/list/{{$page_prev}}" class="prev">
+    			@if($page_prev > 0)
+    			<a href="{{url('/recommend/list/'.$page_prev)}}" class="prev">
     			<div >
     				< prev
     			</div>
     			</a>
+    			@endif
     			@for($i=0;$i<$page['iteration'];$i++)
-    				<a href="/recommend/list/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+    				@php
+    					$currentPage = $page['start_paging']+$i;
+    				@endphp
+    				<a href="{{url('/recommend/list/'.$currentPage)}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
     				<div class="page-paging-number-container">
     					{{$page['start_paging']+$i}}
     				</div>
     				</a>
     			@endfor
-    			<a href="/recommend/list/{{$page_next}}" class="next">
+    			<a href="{{url('/recommend/list/'.$page_next)}}" class="next">
     			<div>
     				next >
     			</div>

@@ -12,7 +12,7 @@
 	@foreach($banner as $item)
             <div class="item-wrapper">
             <div class="item">
-                <img src="/{{$item->banner_url}}"/>
+                <img src="{{asset($item->banner_url)}}"/>
                  
             </div>
             <div class="item-detail">
@@ -48,21 +48,24 @@
     				$page_next = $page['current_paging']+1;
     			@endphp
     			@if($page_prev > 0)
-    			<a href="/admin/banner/list/{{$page_prev}}" class="prev">
+    			<a href="{{url('/admin/banner/list/'.$page_prev)}}" class="prev">
     			<div >
     				< prev
     			</div>
     			</a>
     			@endif
     			@for($i=0;$i<$page['iteration'];$i++)
-    				<a href="/admin/banner/list/{{$page['start_paging']+$i}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
+    				@php
+    					$currentPage = $page['start_paging']+$i;
+    				@endphp
+    				<a href="{{url('/admin/banner/list/'.$currentPage)}}" @if($page['start_paging']+$i == $page['current_paging']) class="active" @endif>
     				<div class="page-paging-number-container">
     					{{$page['start_paging']+$i}}
     				</div>
     				</a>
     			@endfor
     			@if($page_next < $page['total_paging'])
-    			<a href="/admin/banner/list/{{$page_next}}" class="next">
+    			<a href="{{url('/admin/banner/list/'.$page_next)}}" class="next">
     			<div>
     				next >
     			</div>

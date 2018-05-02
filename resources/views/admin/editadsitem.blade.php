@@ -14,10 +14,10 @@
             <h3 class="page-section-header">Portrait Image</h3>
             <div class="thumbnail-image-container big">
             	@if (Session::get('thumbnail_url') != null)
-            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" >
+            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="{{asset(Session::get('thumbnail_url'))}}" >
         	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
             	@else
-                <img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{$item->ads_portrait_url}}" >
+                <img class="thumbnail-image-priview big" id="thumbnail-image" src="{{asset($item->ads_portrait_url)}}" >
         	    <input type="hidden" name="prev_url" value="{{$item->ads_portrait_url}}"/>
                 @endif
             </div>
@@ -45,10 +45,10 @@
                 <h3 class="page-section-header">Landscape Image</h3>
                 <div class="banner-image-container">
                 	@if (Session::get('banner_url') != null)
-                    <img class="banner-image-priview" id="banner-image" height="200" width="200" src="/{{Session::get('banner_url')}}" >
+                    <img class="banner-image-priview" id="banner-image" height="200" width="200" src="{{asset(Session::get('banner_url'))}}" >
         	    	<input type="hidden" name="prev_banner_url" value="{{Session::get('banner_url')}}"/>	
                     @else
-                    <img class="banner-image-priview" id="banner-image" src="/{{$item->ads_landscape_url}}" >
+                    <img class="banner-image-priview" id="banner-image" src="{{asset($item->ads_landscape_url)}}" >
         	    	<input type="hidden" name="prev_banner_url" value="{{$item->item_url}}"/>
                     @endif
                 </div>
