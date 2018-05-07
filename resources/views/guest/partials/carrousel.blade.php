@@ -3,7 +3,7 @@
 
         var jssor_2_options = {
           $AutoPlay: 1,
-          $AutoPlaySteps: 4,
+          $AutoPlaySteps: 1,
           $SlideDuration: 160,
           $SlideWidth: 300,
           $SlideHeight: 300,
@@ -11,7 +11,7 @@
           $FillMode: 5,
           $ArrowNavigatorOptions: {
             $Class: $JssorArrowNavigator$,
-            $Steps: 4
+            $Steps: 1
           },
           $BulletNavigatorOptions: {
             $Class: $JssorBulletNavigator$
@@ -22,7 +22,7 @@
 
         /*#region responsive code begin*/
 
-        var MAX_WIDTH = 980;
+        var MAX_WIDTH = 1028;
 
         function ScaleSlider() {
             var containerElement = jssor_2_slider.$Elmt.parentNode;

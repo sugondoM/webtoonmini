@@ -47,7 +47,7 @@
     <!-- Jssor Slider End -->
             
 
-    <div id="page-main-container">
+    <div id="page-main-container" class="wide">
     <div class="home-container">
     
         <div id="banner-mk2">
@@ -58,7 +58,7 @@
             </div>
             <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:300px;overflow:hidden;">
                  @foreach($items as $item)
-            	<div><img data-u="image" src="{{asset($item->item_url)}}" /></div>
+            	<div><a href="{{url('/series/'.str_replace(' ', '_', $item->series_title))}}"><img data-u="image" src="{{asset($item->thumbnail_url)}}" /></a></div>
            		 @endforeach
                 
                 
@@ -85,25 +85,37 @@
             </div>
             <script type="text/javascript">jssor_2_slider_init();</script>
         </div>
-        @php
-        	$i = 1;
-        	$j = 1;
-        @endphp
-        @foreach($ads as $ad)
-        	@if($i == 1)
-        		<div class="banner-link-container">
-        	@endif
-        		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-50"><img src="{{asset($ad->ads_landscape_url)}}"/></div></a>
-          	@if($i == 2 || count($ads) == $j)
-        		</div>
-        		 
-        	@endif
-        	@php
-        		$i++;
-                $j++;
-                if($i>2)$i=1;
-            @endphp
-        @endforeach
-    </div>
+        
+        <div class="donate-container">
+           
+           @if($ads!=null)
+            	 @php
+                	$i = 1;
+                	$j = 1;
+                @endphp
+                @foreach($ads as $ad)
+                	@if(count($ads) == $j && $j%2!=0)
+                		<div class="banner-link-container">
+                    		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-70"><div class="image" style="background-image:url('{{asset($ad->ads_landscape_url)}}');"></div></div></a>
+                    	</div>
+                    @else
+                	@if($i == 1)
+                		<div class="banner-link-container">
+                	@endif
+                		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-50"><div class="image" style="background-image:url('{{asset($ad->ads_landscape_url)}}');"></div></div></a>
+                  	@if($i == 2 || count($ads) == $j)
+                		</div>
+                		 
+                	@endif
+                	@endif
+                	@php
+                		$i++;
+                        $j++;
+                        if($i>2)$i=1;
+                    @endphp
+                @endforeach
+            	
+            @endif
+        </div>
     </div>
 @endsection

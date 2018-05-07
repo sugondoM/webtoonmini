@@ -20,11 +20,10 @@
 			 	</div>
 			 	<div class="left-profile">
 			 		<h2>Biodata</h2>
-			 		@if($profile->username!=null)
-			 			<p>FullName : {{$profile->username}}</p>
-			 		@endif
 			 		@if($profile->nickname!=null)
 			 			<p>NickName : {{$profile->nickname}}</p>
+			 		@else
+			 			<p>NickName : {{$profile->username}}</p>
 			 		@endif
 			 		@if($profile->email!=null)
 			 			<p>Email : {{$profile->email}}</p>

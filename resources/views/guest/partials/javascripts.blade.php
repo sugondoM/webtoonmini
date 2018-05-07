@@ -7,7 +7,14 @@
             
             $('html, body').animate({
                 scrollTop: $("#pages-container-"+id_number[2]).offset().top
-            }, 2000);
+            }, 1000);
+        });
+
+        $("#topBtn").click(function() {
+            
+            $('html, body').animate({
+                scrollTop: $("body").offset().top
+            }, 1000);
         });
 
         $(".page-thumbnail-intro").click(function() {

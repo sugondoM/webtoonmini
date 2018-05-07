@@ -5,20 +5,23 @@
 </div>
 <div id="container">
 <div id="page-content-wrapper">
-<form action="{{url('admin/gallery/doadd')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('admin/gallery/doedit')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
-    <input type="hidden" id="upload-count-total" name="file-count-total" value="1">
+    {{ method_field('put')}}
+    <input type="hidden" id="id" name="id" value="{{$item->id}}">
     <div id="page-upload-left" class="thumb-big">
         <div id="page-smile-container">
             <h3 class="page-section-header">Gallery Item</h3>
             <div class="thumbnail-image-container big">
-            	@if (Session::get('thumbnail_url') != null)
-            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="{{asset(Session::get('thumbnail_url'))}}" >
+            	
+        	   	@if (Session::get('thumbnail_url') != null)
+            	<img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{Session::get('thumbnail_url')}}" >
         	    <input type="hidden" name="prev_url" value="{{Session::get('thumbnail_url')}}"/>
             	@else
-                <p class="big">Select Image to upload</p>
-                <img class="thumbnail-image-priview big" id="thumbnail-image">
+                <img class="thumbnail-image-priview big" id="thumbnail-image" src="/{{old('item_url',$item->item_url)}}" >
+        	    <input type="hidden" name="prev_url" value="{{old('item_url',$item->item_url)}}"/>
                 @endif
+            	
             </div>
             <input class="thumbnail-image-button" id="thumbnail-file" type="file" name="thumbnail"/>
             <p class="page-section-info"></p>
@@ -31,7 +34,7 @@
     <div id="page-upload-right" class="thumb-big">
         <div id="page-smale-container">
             <h3 class="page-section-header">Item Name</h3>
-            <input type="text" value="{{old('item_name')}}" placeholder="Less Than 50 Character" name="item_name" class="custom-inputtext width-500"/>
+            <input type="text" value="{{old('item_name',$item->item_name)}}" placeholder="Less Than 50 Character" name="item_name" class="custom-inputtext width-500"/>
             @if ($errors->has('item_name'))
           		<div class="error">{{ $errors->first('episode_title') }}</div>
         	@endif
@@ -49,11 +52,11 @@
           		<div class="error">{{ $errors->first('item_type') }}</div>
         	@endif
             <h3 class="page-section-header">Illustrator</h3>
-            <input type="text" value="{{old('illustrator')}}" placeholder="Less Than 50 Character" name="illustrator" class="custom-inputtext width-500"/>
+            <input type="text" value="{{old('illustrator',$item->illustrator)}}" placeholder="Less Than 50 Character" name="illustrator_name" class="custom-inputtext width-500"/>
             <h3 class="page-section-header">Series Name</h3>
-            <input type="text" value="{{old('series_name')}}" placeholder="Less Than 50 Character" name="series_name" class="custom-inputtext width-500"/>
+            <input type="text" value="{{old('series_name',$item->series_name)}}" placeholder="Less Than 50 Character" name="series_name" class="custom-inputtext width-500"/>
             <h3 class="page-section-header">Price</h3>
-            <input type="text" value="{{old('price')}}" placeholder="Less Than 50 Character" name="price" class="custom-inputtext width-500"/>
+            <input type="text" value="{{old('price',$item->price)}}" placeholder="Less Than 50 Character" name="price" class="custom-inputtext width-500"/>
             <h3 class="page-section-header">Currency</h3>
             <div class="custom-select width-500">
             <select name="currency" >
@@ -62,8 +65,8 @@
                 <option value="2">USD</option>
             </select>
             </div>
-          
             <br/>
+            
             <button id="submit-button1" type="submit" value="submit" class="custom-button width-500">Upload Item</button>
             @if ($errors->any())
              <div class="list-error-container">

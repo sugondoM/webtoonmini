@@ -1,14 +1,14 @@
 @extends('guest.layouts.master')
 
 
-@section('title', 'Recommend')
+@section('title', 'Featured')
 
 <div id="page-main-wrapper" class="theme-main-wrapper">
 @section('content')
 	@php 
             $index = 0
     @endphp
-    @foreach($series as $serie)
+    @foreach($banners as $banner)
         
         {{-- @for($i=0;$i<5;$i++)--}}
         @if($index % 2 == 0)
@@ -19,12 +19,11 @@
             	<div class="page-recommend-container page-recommend-container theme-bg-color-1">
         @endif
                 
-                    <a href="{{url('/series/'.str_replace(' ', '_', $serie->series_title))}}">
-                        <div class="recomend-image" style="background: url('{{asset($serie->banner_url)}}')">
+                    <a href="{{url($banner->banner_links)}}">
+                        <div class="recomend-image" style="background: url('{{asset($banner->banner_url)}}')">
                         </div>
                         <div class="recommend-detail">
-                        	<p class="recommend-title theme-title-sublime">{{$serie->series_title}}</p>
-                        	<p class="recommend-subtitle theme-subtitle-sublime">By: {{$serie->author}}</p>
+                        	<p class="recommend-title theme-title-sublime">{{$banner->banner_name}}</p>
                         </div>
                     </a>
                 </div>
@@ -35,7 +34,7 @@
     {{--@endfor--}}
     @endforeach
     
-    @while($index<10)
+    @while($index<4)
         @if($index % 2 == 0)
             <div class="page-recommend-wrapper theme-bg-color-1">
             	 <div class="page-recommend-container theme-bg-color-2">

@@ -22,7 +22,7 @@ Route::get('/donate',                               'Front\WebtoonController@sho
 Route::get('/gallery',                              'Front\WebtoonController@showGalleryPage');
 Route::get('/gallery/{page}/{paging?}',                     'Front\WebtoonController@showGalleryPage');
 Route::get('/profile',                              'Front\WebtoonController@showProfilePage');
-Route::get('/recommend/list/{paging?}',             'Front\WebtoonController@showRecommendPage');
+Route::get('/featured/list/{paging?}',             'Front\WebtoonController@showRecommendPage');
 Route::get('/shop/{paging?}',                                 'Front\WebtoonController@showShopPage');
 Route::get('/webtoon/list/{paging?}',                              'Front\WebtoonController@showWebtoonPage');
 Route::get('/series/{series}/{paging?}',              'Front\WebtoonController@showWebtoonSeriesPage');
@@ -36,6 +36,8 @@ Route::get('/admin/series/list/{paging?}',                     ['middleware' => 
 Route::get('/admin/episode/list/{series}/{paging?}',           ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showEpisodesList']);
 Route::get('/admin/series/edit/{series}',            ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showEditSeries']);
 Route::get('/admin/episode/edit/{episode}',          ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showEditEpisode']);
+Route::get('/admin/page/list/{episode}',             ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showListPage']);
+Route::get('/admin/page/edit/{episode}/{pages}',             ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showEditPage']);
 Route::get('/admin/gallery/add',                     ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showUploadGallery']);
 Route::get('/admin/gallery/list/{paging?}',                         ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showGallery']);
 Route::get('/admin/gallery/edit/{itemid}',           ['middleware' => 'auth', 'uses' => 'Admin\AdminController@showEditGalleryItem']);
@@ -49,6 +51,7 @@ Route::get('/admin/ads/edit/{itemid}',               ['middleware' => 'auth', 'u
 Route::get('/admin/series/dodelete/{series}',         ['middleware' => 'auth', 'uses' => 'Admin\AdminController@doDeleteSeries']);
 Route::get('/admin/series/doundelete/{series}',       ['middleware' => 'auth', 'uses' => 'Admin\AdminController@doUnDeleteSeries']);
 Route::get('/admin/episode/dodelete/{episode}',       ['middleware' => 'auth', 'uses' => 'Admin\AdminController@doDeleteEpisode']);
+Route::get('/admin/page/dodelete/{episode}/{page}',       ['middleware' => 'auth', 'uses' => 'Admin\AdminController@doDeletePage']);
 Route::put('/admin/series/doedit',                   'Admin\AdminController@doEditSeries');
 Route::put('/admin/episode/doedit',                  'Admin\AdminController@doEditEpisode');
 Route::post('/admin/episode/doadd',                  'Admin\AdminController@doUploadEpisode');
@@ -59,6 +62,7 @@ Route::post('/admin/ads/doadd',                      'Admin\AdminController@doUp
 Route::put('/admin/profile/doedit',                  'Admin\AdminController@doEditProfile');
 Route::put('/admin/gallery/doedit',                  'Admin\AdminController@doEditGalleryItem');
 Route::put('/admin/banner/doedit',                   'Admin\AdminController@doEditBannerItem');
+Route::put('/admin/page/doedit',                     'Admin\AdminController@doEditPage');
 Route::put('/admin/ads/doedit',                      'Admin\AdminController@doEditAdsItem');
 Route::get('/admin/gallery/dodelete/{item}',          ['middleware' => 'auth', 'uses' => 'Admin\AdminController@doDeleteGalleryItem']);
 Route::get('/admin/banner/dodelete/{item}',           ['middleware' => 'auth', 'uses' => 'Admin\AdminController@doDeleteBannerItem']);

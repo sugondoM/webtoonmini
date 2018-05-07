@@ -58,6 +58,6 @@ class Series extends Model
     
     public function category()
     {
-        return $this->hasOne('App\model\Category');
+        return $this->hasOne('App\model\Category', 'id', 'genre');
     }
 }

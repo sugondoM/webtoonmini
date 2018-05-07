@@ -41,7 +41,7 @@ use App\model\Ads;
 		    $offset = $number * 10; 
 		    
             $seriesA = $this->myDecodeURL($seriesA);
-		    $series = Series::where('series_title', $seriesA)
+		    $series = Series::with('category')->where('series_title', $seriesA)
     		    ->orderBy('id', 'asc')
     		    ->first();
 		    
@@ -73,26 +73,28 @@ use App\model\Ads;
             $episodes = Episode::where('series_id',$series->id)
                 ->where('episode_number', $episodeNumber)
                 ->first();
+            
+            $allEpisodes = Episode::where('series_id',$series->id)->get(['episode_number','thumbnail_url']);
 
             $pages = Page::where('episode_id', $episodes->id)
                 ->orderBy('page_number', 'asc')
                 ->get();
-            
-            return view('guest.episodes', compact('episodes','pages'));
+            $ads = Ads::where('ads_page',AdminPreference::$stringWebCominPage)->inRandomOrder()->take(4)->get();
+            return view('guest.episodes', compact('episodes','pages','series','ads','allEpisodes'));
 		}
                 
         public function showDonatePage()
 		{
 		    $banners = Banner::where('banner_page',AdminPreference::$stringDonatePage)->get();
-		    $ads = Ads::inRandomOrder()->take(4)->get();
+		    $ads = Ads::where('ads_page',AdminPreference::$stringDonatePage)->inRandomOrder()->take(4)->get();
 			return view('guest.donate', compact('banners','ads'));
 		}
                 
         public function showHomePage()
 		{
             $banners = Banner::where('banner_page',AdminPreference::$stringMainPage)->get();
-            $ads = Ads::inRandomOrder()->take(8)->get();
-            $items = Gallery::where('item_type',4)
+            $ads = Ads::where('ads_page',AdminPreference::$stringMainPage)->inRandomOrder()->take(8)->get();
+            $items = Series::where('deleted',0)
             ->inRandomOrder()->take(6)->get();
             return view('guest.home', compact('banners','ads','items'));
 		}
@@ -121,19 +123,18 @@ use App\model\Ads;
 		    $number = $paging - 1;
 		    $offset = $number * 10;
 		    
-		    $series = Series::where('deleted', 0)
-		    ->where('recommend',1)
+		    $banners = Banner::where('banner_page',AdminPreference::$stringRecommendPage)
 		    ->orderBy('id', 'asc')
 		    ->offset($offset)
 		    ->limit(10)
 		    ->get();
-		    $totalSeries = Series::where('deleted', 0)->where('recommend',1)->count();
-		    $totalPaging = $totalSeries / 10;
+		    $totalBanner = Banner::where('banner_page',AdminPreference::$stringRecommendPage)->count();
+		    $totalPaging = $totalBanner / 10;
 		    if($number > $totalPaging) {
 		        abort(404);
 		    }
 		    $page = $this->getPagination($paging, $totalPaging, 10, 5);
-		    return view('guest.recommend', compact('series','page'));
+		    return view('guest.recommend', compact('banners','page'));
 		}
                 
         public function showProfilePage()

@@ -46,28 +46,38 @@
     <!-- Jssor Slider End -->
             
 
-    <div id="page-main-container" >
-    <div class="donate-container">
-        @php
-        	$i = 1;
-        	$j = 1;
-        @endphp
-        @foreach($ads as $ad)
-        	@if($i == 1)
-        		<div class="banner-link-container">
-        	@endif
-        		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-50"><img src="{{asset($ad->ads_landscape_url)}}"/></div></a>
-          	@if($i == 2 || count($ads) == $j)
-        		</div>
-        		 
-        	@endif
-        	@php
-        		$i++;
-                $j++;
-                if($i>2)$i=1;
-            @endphp
-        @endforeach
-    </div>
+    <div id="page-main-container" class="wide">
+   <div class="donate-container">
+           
+            @if($ads!=null)
+            	 @php
+                	$i = 1;
+                	$j = 1;
+                @endphp
+                @foreach($ads as $ad)
+                	@if(count($ads) == $j && $j%2!=0)
+                		<div class="banner-link-container">
+                    		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-70"><div class="image" style="background-image:url('{{asset($ad->ads_landscape_url)}}');"></div></div></a>
+                    	</div>
+                    @else
+                	@if($i == 1)
+                		<div class="banner-link-container">
+                	@endif
+                		<a href="{{$ad->ads_links}}"><div class="banner-link-item  width-50"><div class="image" style="background-image:url('{{asset($ad->ads_landscape_url)}}');"></div></div></a>
+                  	@if($i == 2 || count($ads) == $j)
+                		</div>
+                		 
+                	@endif
+                	@endif
+                	@php
+                		$i++;
+                        $j++;
+                        if($i>2)$i=1;
+                    @endphp
+                @endforeach
+            	
+            @endif
+        </div>
     </div>
 </div>
 @endsection

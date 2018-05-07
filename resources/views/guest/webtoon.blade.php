@@ -36,7 +36,7 @@
     {{--@endfor--}}
     @endforeach
     
-    @while($index<10)
+    @while($index<4)
         @if($index % 2 == 0)
             <div class="page-recommend-wrapper theme-bg-color-1">
             	 <div class="page-recommend-container theme-bg-color-2">

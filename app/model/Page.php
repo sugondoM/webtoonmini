@@ -37,6 +37,6 @@ class Page extends Model
     
     public function episode()
     {
-        return $this->belongsTo('App\model\Episode');
+        return $this->belongsTo('App\model\Episode', 'episode_id', 'id');
     }
 }

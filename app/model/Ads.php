@@ -9,6 +9,7 @@ class Ads extends Model
     
     protected $fillable = [
         'ads_name',
+        'ads_page',
         'ads_links',
         'ads_portrait_url',
         'ads_landscape_url',
@@ -17,6 +18,7 @@ class Ads extends Model
     
     protected $rules = array(
         "ads_name"          => "required|max:50",
+        "ads_page"          => "required",
         "ads_links"          => "required|max:600",
         "ads_portrait_url"  => "required|max:600",
         "ads_landscape_url"  => "required|max:600",
@@ -25,6 +27,7 @@ class Ads extends Model
     
     protected $messages = array (
         "ads_name.required"             => "Advertising name must be filled",
+        "ads_page.required"             => "Advertising page must be filled",
         "ads_links.required"             => "Advertising link must be filled",
         "ads_portrait_url.required"     => "Advertising portrait image must be selected",
         "ads_landscape_url.required"    => "Advertising landscape image must be selected",

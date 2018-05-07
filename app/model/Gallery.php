@@ -12,6 +12,7 @@ class Gallery extends Model
         'item_url',
         'item_type',
         'price',
+        'currency',
         'illustrator',
         'series_name'
     ];
@@ -21,6 +22,7 @@ class Gallery extends Model
         "item_url"      => "required|max:600",
         "item_type"     => "required",
         "price"         => "nullable|numeric",
+        "currency"         => "nullable",
         "illustrator"   => "nullable|max:50",
         "series_name"   => "nullable|max:50"
     );

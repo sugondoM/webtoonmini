@@ -45,7 +45,7 @@ class Episode extends Model
     
     public function page()
     {
-        return $this->hasMany('App\model\Page');
+        return $this->hasMany('App\model\Page', 'id', 'episode_id');
     }
     
    

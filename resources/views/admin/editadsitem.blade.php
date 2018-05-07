@@ -36,6 +36,18 @@
             @if ($errors->has('ads_name'))
           		<div class="error">{{ $errors->first('ads_name') }}</div>
         	@endif
+        	<h3 class="page-section-header">Advertising Page</h3>
+            <div class="custom-select width-500">
+            <select name="ads_page" >
+                <option value="0">Select Page</option>
+                @foreach($pages as $page)
+                <option value="{{$page['page_name']}}">{{$page['page_name']}}</option>
+                @endforeach
+            </select>
+            </div>
+            @if ($errors->has('ads_page'))
+          		<div class="error">{{ $errors->first('ads_page') }}</div>
+        	@endif
             <h3 class="page-section-header">Advertising Link</h3>
             <input type="text" value="{{old('ads_links',$item->ads_links)}}" placeholder="Less Than 50 Character" name="ads_links" class="custom-inputtext width-500"/>
             @if ($errors->has('ads_links'))
@@ -49,7 +61,7 @@
         	    	<input type="hidden" name="prev_banner_url" value="{{Session::get('banner_url')}}"/>	
                     @else
                     <img class="banner-image-priview" id="banner-image" src="{{asset($item->ads_landscape_url)}}" >
-        	    	<input type="hidden" name="prev_banner_url" value="{{$item->item_url}}"/>
+        	    	<input type="hidden" name="prev_banner_url" value="{{$item->ads_landscape_url}}"/>
                     @endif
                 </div>
                 <input class="banner-image-button" id="banner-file" type="file" name="banner"/>

@@ -501,3 +501,21 @@ p.page-section-info{
 .page-paging-container a.next, .page-paging-container a.prev{
 	width: 60px;
 }
+
+.edit-button{
+	clear: both;
+    width: 80%;
+    background-color: #ccc;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    margin: auto;
+}
+
+.edit-button a{
+	color: #58001a;
+	text-decoration: none;
+}

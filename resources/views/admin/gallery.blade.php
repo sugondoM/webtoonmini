@@ -109,7 +109,7 @@
                 <a href="{{url('admin/gallery/edit/'.$item->id)}}" ><div class="width-50 edit">Edit
                 </div>
                 </a>
-               	<a href="{{url('admin/galler/dodelete/'.$item->id)}}"><div class="width-50 delete">Delete
+               	<a href="{{url('admin/gallery/dodelete/'.$item->id)}}"><div class="width-50 delete">Delete
                 </div>
                 </a>
             </div>

@@ -20,6 +20,7 @@
             </div>
             <div class="item-detail">
             <p class="name">Item: {{$item->ads_name}}</p>
+            <p class="url">Page: {{$item->ads_page}}</p>
             <p class="url">URL: {{$item->ads_link}}</p>
             <p class="active">Active: {{$item->ads_active}}</p>
             </div>

@@ -54,6 +54,7 @@ class CreateUsersTable extends Migration
             $table->string('item_url',150);
             $table->integer('item_type');
             $table->integer('price')->nullable();
+            $table->integer('currency')->nullable();
             $table->string('illustrator',50)->nullable();
             $table->string('series_name')->nullable();
             $table->date('created_at');
@@ -86,6 +87,7 @@ class CreateUsersTable extends Migration
             $table->string('ads_links',600);
             $table->string('ads_portrait_url',600);
             $table->string('ads_landscape_url',600);
+            $table->string('ads_page',45);
             $table->tinyInteger('ads_active');
             $table->date('created_at');
             $table->date('updated_at');

@@ -18,10 +18,7 @@
     		 			</div>
     			 	</div>
     			 	<div class="left-shop">
-    			 		<h2>Item Description</h2>
-    			 		@if($item->item_name!=null)
-    			 			<p>Item : {{$item->item_name}}</p>
-    			 		@endif
+    			 		<h2>{{$item->item_name}}</h2>
     			 		@if($item->illustrator!=null)
     			 			<p>Illustrator : {{$item->illustrator}}</p>
     			 		@endif
@@ -29,7 +26,16 @@
     			 			<p>Series : {{$item->series_name}}</p>
     			 		@endif
     			 		@if($item->price!=null)
-    			 			<p>Price : {{$item->price}}</p>
+    			 			<p>Price : 
+    			 			
+    			 			
+    			 			 
+    			 			@if($item->currency==2)
+    			 				 {{number_format($item->price,2,",",".")}} USD
+    			 			@else
+    			 			     {{number_format($item->price,0,",",".")}} IDR
+    			 			@endif
+    			 			</p>
     			 		@endif
     			 		
     			 	</div>

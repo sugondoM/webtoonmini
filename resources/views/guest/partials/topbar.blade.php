@@ -19,8 +19,8 @@
         <a href = "{{url('donate')}}" class="menu-button @if(Request::path() == 'donate') active @endif"> 
         	Donate
        	</a>
-        <a href = "{{url('recommend/list')}}" class="menu-button @if(Request::is('recommend/*')||Request::is('recommend')) active @endif" > 
-        	Recommendation
+        <a href = "{{url('featured/list')}}" class="menu-button @if(Request::is('featured/*')||Request::is('featured')) active @endif" > 
+        	Featured
         </a>
     </div>
 </div>

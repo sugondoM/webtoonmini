@@ -12,7 +12,7 @@
 <form action="{{url('/admin/episode/doadd')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" name="series_id" value="{{$series_id}}">
-    <input type="hidden" id="upload-count-total" name="file_count_total" value="1">
+    <input type="hidden" id="upload-count-total" name="file_count_total" value="0">
     <div id="page-upload-left">
         <h3 class="page-section-header">Thumbnail</h3>
         <div class="thumbnail-image-container">

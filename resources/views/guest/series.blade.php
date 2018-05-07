@@ -16,6 +16,12 @@
         
        
         <div class="episode-wrapper" class="theme-bg-color-1">
+        	<div class="episode-opening">
+           		<h3 class="series-title">{{$series->series_title}}</h3>
+           		<p class="series-genre">Genre: {{$series->category['category_name']}}</p>
+           		<p class="series-summary">{{$series->summary}}</p>
+           	</div>
+        
         @foreach($episodes as $episode)
             {{--@for($i=0; $i<20; $i++)--}}
             <a href="{{url('/episode/'.str_replace(' ', '_', $series->series_title).'/'.$episode->episode_number)}}">

@@ -22,6 +22,8 @@
                             <div class="button-container">
                                 <a href="{{url('admin/episode/edit/'.$episode->id)}}" ><div class="edit">Edit
                                 </div></a>
+                                <a href="{{url('admin/page/list/'.$episode->id)}}" ><div class="edit">Pages
+                                </div></a>
                                 <a href="{{url('admin/episode/dodelete/'.$episode->id)}}"><div class="delete">Delete
                                 </div></a>
                             </div>

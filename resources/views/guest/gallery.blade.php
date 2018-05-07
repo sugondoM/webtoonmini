@@ -30,21 +30,14 @@
             </div>
         </a>
         </div>
-        
-        <div class="gallery-button-wrapper huge-leap theme-border  @if(Request::path() == 'gallery/shop') active @endif">
-         <a href="/gallery/shop">
-            <div id="button-shop" class="gallery-button-container">
-                Shop
-            </div>
-        </a>
-        </div>
+       
     </div>
     <div id="page-itemgallery-container" class="floating ">
         <div class="gallery-box-wrapper">
         	@foreach($items as $item)
             <div class="gallery-box-container">
             <a>
-                <div class="box-thumbnail" id="{{$item->id}}"><img src="{{asset($item->item_url)}}" height="120"></div>
+                <div class="box-thumbnail" id="{{$item->id}}"><img  src="{{asset($item->item_url)}}" height="140" ></div>
             </a>
             </div>
             @endforeach
@@ -89,8 +82,8 @@
     </div>
     <div id="page-viewgallery-container" class="floating theme-bg-color-1">
         
-        <div id="image-view" style="background: url('@if(!empty($items[0]->item_url)){{asset($items[0]->item_url)}}@endif');">
-            
+        <div id="image-view">
+            <img id="gallery-preview" src="@if(!empty($items[0]->item_url)){{asset($items[0]->item_url)}}@endif">
         </div>
         <div id="description">
             
@@ -108,8 +101,21 @@
             	console.log("test");
         		url = $(this).find('img').attr('src');
         		console.log(url);
-        		$('#image-view').css('background',"url('"+url+"')");
+        		$('#gallery-preview').attr('src',url);
+        		
             });
+        	$('img#gallery-preview').on('load', function(){
+        		if($(this).width()>=$(this).height()){
+        			$('#gallery-preview').css("height","99%");
+        			$('#gallery-preview').css("width","auto");
+        			$('#gallery-preview').css("overflow","auto");
+            	}else{
+            		$('#gallery-preview').css("height","auto");
+        			$('#gallery-preview').css("width","100%");
+        			$('#gallery-preview').css("overflow","auto");
+                }
+        	});
+        		            
         });
 	</script>
 @endsection

@@ -35,12 +35,7 @@
             @if ($errors->has('banner_name'))
           		<div class="error">{{ $errors->first('banner_name') }}</div>
         	@endif
-            <h3 class="page-section-header">Banner Link</h3>
-            <input type="text" value="{{old('banner_links')}}" placeholder="Less Than 50 Character" name="banner_links" class="custom-inputtext width-500"/>
-            @if ($errors->has('banner_links'))
-          		<div class="error">{{ $errors->first('banner_links') }}</div>
-        	@endif
-            <h3 class="page-section-header">Banner Page</h3>
+        	<h3 class="page-section-header">Banner Page</h3>
             <div class="custom-select width-500">
             <select name="banner_page" >
                 <option value=0>Select Page</option>
@@ -49,9 +44,15 @@
                 @endforeach
             </select>
             </div>
-            @if ($errors->has('genre'))
-          		<div class="error">{{ $errors->first('genre') }}</div>
+            @if ($errors->has('banner_page'))
+          		<div class="error">{{ $errors->first('banner_page') }}</div>
         	@endif
+            <h3 class="page-section-header">Banner Link</h3>
+            <input type="text" value="{{old('banner_links')}}" placeholder="Less Than 50 Character" name="banner_links" class="custom-inputtext width-500"/>
+            @if ($errors->has('banner_links'))
+          		<div class="error">{{ $errors->first('banner_links') }}</div>
+        	@endif
+            
             <br/>
             <button id="submit-button1" type="submit" value="submit" class="custom-button width-500">Upload Item</button>
             @if ($errors->any())

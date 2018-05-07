@@ -19,7 +19,8 @@
 use App\model\Banner;
 use App\model\Ads;
 use App\model\SitePage;
-                                                                                                    
+use phpDocumentor\Reflection\Types\Array_;
+                                                                                                                    
     class AdminController extends Controller
     {
         private $errorValidation;
@@ -176,6 +177,35 @@ use App\model\SitePage;
                     ->withInput(Input::all())->with('thumbnail_url' , $inputEpisodes['thumbnail_url']);
             }
             $updateseries = Episode::whereId($request['id'])->update($inputEpisodes);
+            
+            //dd($lastPageNumber);
+            $directoryName = dirname($inputEpisodes['thumbnail_url'])."/episode".$inputEpisodes['episode_number']."/";
+            //dd($episode_id);
+            for($i=0;$i<sizeof($request["photo"]);$i++){
+                
+                if($request["photo"]!=null){
+                    
+                    $photo = $request["photo"][$i];
+                    $pageNumber = $request["pageNumber"][$i];
+                    if( $pageNumber != null ){
+                        $filename = $pageNumber;
+                        
+                    }else{
+                        $filename= $i+1;
+                    }
+                    
+                    $photo->move($directoryName,$filename.'.'.$photo->getClientOriginalExtension());
+                    
+                    $page = new Page();
+                    $page->page_number = $filename;
+                    $page->file_url = $directoryName.$filename.'.'.$photo->getClientOriginalExtension();
+                    $page->episode_id = $request['id'];
+                    $page->save();
+                }
+            }
+            
+            
+            
             return redirect("/admin/episode/list/".$request['series_id']);
             
         }
@@ -218,7 +248,6 @@ use App\model\SitePage;
             
             $ads = new Ads();
             $inputAds = $this->adsHandler($request);
-            
             if ($this->myValidate($inputAds, $ads->getRules(), $ads->getMessages(), [])) {
                 
             } else {
@@ -229,6 +258,24 @@ use App\model\SitePage;
             }
             $updateAds = Ads::whereId($request['id'])->update($inputAds);
             return redirect("/admin/ads/list");
+        }
+        
+        public function doEditPage(Request $request)
+        {
+            
+            $page = new Page();
+            $currentPage = Page::where('episode_id', $request['episode_id'])->where('page_number', $request['page_number'])->first();
+            
+            $inputPage = $this->pageHandler($request,$currentPage);
+            if ($this->myValidate($inputPage, $page->getRules(), $page->getMessages(), [])) {
+                
+            } else {
+                return Redirect::back()->withErrors($this->errorValidation)
+                ->withInput(Input::all())
+                ->with('thumbnail_url'  , $inputPage['file_url']);
+            }
+            $updatePage = Page::whereId($currentPage['id'])->update($inputPage);
+            return redirect("/admin/page/list/".$request['episode_id']);
         }
         
         public function doLogout()
@@ -255,8 +302,23 @@ use App\model\SitePage;
             return Redirect::back();
         }
         
+        public function doDeletePage($episode,$pages){
+            $pages = Page::where('episode_id',$episode)->where('page_number',$pages)->delete();
+            return Redirect::back();
+        }
+        
         public function doDeleteGalleryItem($item){
             $pages = Gallery::where('id',$item)->delete();
+            return Redirect::back();
+        }
+        
+        public function doDeleteBannerItem($item){
+            $pages = Banner::where('id',$item)->delete();
+            return Redirect::back();
+        }
+        
+        public function doDeleteAdsItem($item){
+            $pages = Ads::where('id',$item)->delete();
             return Redirect::back();
         }
         
@@ -421,13 +483,14 @@ use App\model\SitePage;
         
         public function showUploadBanner()
         {
-            $pages = SitePage::get();
+            $pages = array(array("page_name" => AdminPreference::$stringDonatePage), array("page_name" => AdminPreference::$stringMainPage));
             return view('admin.uploadbanneritem',compact('pages'));
         }
         
         public function showUploadAds()
         {
-            return view('admin.uploadadsitem');
+            $pages = SitePage::get();
+            return view('admin.uploadadsitem',compact('pages'));
         }
         
         public function showSeriesList($paging=1)
@@ -436,7 +499,7 @@ use App\model\SitePage;
             $offset = $number * 30;
             
             $series = Series::join(
-                'category',
+                'CATEGORY',
                 'category.id','=','series.genre'
                )
                ->orderBy('series.series_title', 'asc')
@@ -491,9 +554,27 @@ use App\model\SitePage;
         {
             $episodes = Episode::where('id', $episode)
                ->first();
+               $lastPageNumber = Page::where('episode_id',$episode)->orderBy('page_number','desc')->get(['page_number'])->first();
+            $pages = Page::where('episode_id', $episode)
+               ->get();
             
-            return view('admin.editepisode',compact('episodes'));
+            return view('admin.editepisode',compact('episodes','lastPageNumber','pages'));
         }
+        
+        public function showListPage($episode)
+        {
+            $episodesPages = Page::where('episode_id', $episode)->get();
+            $episodes = Episode::where('id', $episode)
+            ->first();
+            return view('admin.pages',compact('episodesPages','episodes'));
+        }
+        
+        public function showEditPage($episode,$page)
+        {
+            $page = Page::where('episode_id', $episode)->where('page_number', $page)->first();
+            return view('admin.editpage',compact('page'));
+        }
+        
         
         public function showGallery($paging=1)
         {
@@ -582,16 +663,17 @@ use App\model\SitePage;
         }
         
         public function showEditBannerItem($itemid){
-            $pages = SitePage::get();
+            $pages = array(array("page_name" => AdminPreference::$stringDonatePage), array("page_name" => AdminPreference::$stringMainPage));
             $item = Banner::where('id',$itemid)
             ->first();
             return view('admin.editbanneritem', compact('item','pages'));
         }
         
         public function showEditAdsItem($itemid){
+            $pages = SitePage::get();
             $item = Ads::where('id',$itemid)
             ->first();
-            return view('admin.editadsitem', compact('item'));
+            return view('admin.editadsitem', compact('item','pages'));
         }
         
         public function myValidate($data, $rules, $messages, $custom)
@@ -740,6 +822,7 @@ use App\model\SitePage;
             $inputGallery['item_url'] = $thumbnail_url;
             $inputGallery['item_type'] = $item_type;
             $inputGallery['price'] = $request['price'];
+            $inputGallery['currency'] = $request['currency'];
             $inputGallery['illustrator'] = $request['illustrator'];
             $inputGallery['series_name'] = $request['series_name'];
             
@@ -750,6 +833,7 @@ use App\model\SitePage;
             $inputBanner = [];
             $directoryName = "";
             $thumbnail_url = "";
+            $pagew = "";
             $filtered_title = str_replace(" ","_",$request['banner_name']);
             
             
@@ -766,13 +850,45 @@ use App\model\SitePage;
                 $photo->move($directoryName,$filename);
             }
             
+            if ($request['banner_page'] != "0") {
+                $pagew = $request['banner_page'];
+            }
             
             $inputBanner['banner_name'] = $request['banner_name'];
             $inputBanner['banner_links'] = $request['banner_links'];
             $inputBanner['banner_url']  = $thumbnail_url;
-            $inputBanner['banner_page'] = $request['banner_page'];
+            $inputBanner['banner_page'] = $pagew;
             
             return $inputBanner;
+        }
+        
+        public function pageHandler($request, $currentPage){
+            $inputPage = [];
+            $directoryName = "";
+            $thumbnail_url = "";
+            
+           
+            
+            $directoryName = dirname($currentPage['file_url']);
+            
+            
+            if($request['prev_url']!=null){
+                $thumbnail_url = $request['prev_url'];
+            }
+            
+            if ($request['thumbnail'] != null) {
+                $photo = $request['thumbnail'];
+                $filename = $photo->getClientOriginalName();
+                $thumbnail_url = $directoryName.'/'.$filename;
+                $photo->move($directoryName,$filename);
+            }
+            
+            $inputPage['file_url'] = $thumbnail_url;
+            $inputPage['page_number'] = intval($request['page_number']);
+            $inputPage['episode_id'] = $request['episode_id'];
+            
+            
+            return $inputPage;
         }
         
         public function adsHandler($request){
@@ -783,6 +899,7 @@ use App\model\SitePage;
             $filtered_title = str_replace(" ","_",$request['ads_name']);
             $activation = "";
             $directoryName = 'uploads_gallery/';
+            $pagew = "";
             
             if($request['prev_url']!=null){
                 $thumbnail_url = $request['prev_url'];
@@ -807,7 +924,6 @@ use App\model\SitePage;
                 $portrait_url = $directoryName.$filename2;
                 $photo->move($directoryName,$filename2);
             }
-            
             if($request['ads_active'] != 0){
                 if($request['ads_active']==2){
                     $activation = 0;
@@ -815,13 +931,16 @@ use App\model\SitePage;
                     $activation = 1;
                 }
             }
+            if ($request['ads_page'] != "0") {
+                $pagew = $request['ads_page'];
+            }
             
             $inputAds['ads_name'] = $request['ads_name'];
             $inputAds['ads_links'] = $request['ads_links'];
             $inputAds['ads_portrait_url']  = $thumbnail_url;
             $inputAds['ads_landscape_url']  = $portrait_url;
             $inputAds['ads_active'] = $activation;
-            
+            $inputAds['ads_page'] = $pagew;
             return $inputAds;
         }
         

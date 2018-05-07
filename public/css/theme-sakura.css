@@ -73,3 +73,17 @@
 .theme-separator{
 	border-bottom: 1px solid #ff5671;
 }
+
+.theme-button a .prev-episode, .theme-button a .next-episode{
+	border: 2px solid #ff5671;
+}
+
+.theme-button:hover a .prev-episode, .theme-button:hover a .next-episode{
+	background: #ff5671;
+	color: #fff;
+}
+
+.theme-button a{
+	color: #ff5671;
+	text-decoration: none;
+}

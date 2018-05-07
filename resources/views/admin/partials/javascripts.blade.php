@@ -46,8 +46,8 @@
           });
         }
         
-        var file_count = 1;
-
+        var file_count = $('#upload-count-total').val();
+		console.log( $('#upload-count-total').val());
         $("#add-new-file").click(function () {
             file_count++;
             
@@ -130,10 +130,12 @@
         document.addEventListener("click", closeAllSelect); 
 		$('#upload-box-button').click(function(){
 			$('#upload-basket-button').val(''); 
+			
 			$('#upload-basket-button').click();
 			
 		});
         $('#upload-basket-button').change(function(){
+        	$('#upload-basket').empty(); 
         	addImagesPreview(this);
         });
 
@@ -141,7 +143,7 @@
             console.log(input);
         	  if (input.files) {
             	  for(i=0;i<input.files.length;i++){
-            		  file_count = i+1;
+            		  file_count =  parseInt($('#upload-count-total').val())+i+1;
             		  
             		  
             		  var append_div = '<div class="upload-item" id="upload-item-'+file_count+'">'
