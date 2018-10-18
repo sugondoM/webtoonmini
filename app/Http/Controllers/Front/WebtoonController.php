@@ -74,13 +74,21 @@ use App\model\Ads;
                 ->where('episode_number', $episodeNumber)
                 ->first();
             
+            $prevEpisode = Episode::where('series_id',$series->id)
+                ->where('episode_number', $episodeNumber-1)
+                ->first();
+           $nextEpisode = Episode::where('series_id',$series->id)
+                ->where('episode_number', $episodeNumber+1)
+                ->first();
+                
+            
             $allEpisodes = Episode::where('series_id',$series->id)->get(['episode_number','thumbnail_url']);
 
             $pages = Page::where('episode_id', $episodes->id)
                 ->orderBy('page_number', 'asc')
                 ->get();
             $ads = Ads::where('ads_page',AdminPreference::$stringWebCominPage)->inRandomOrder()->take(4)->get();
-            return view('guest.episodes', compact('episodes','pages','series','ads','allEpisodes'));
+            return view('guest.episodes', compact('episodes','prevEpisode','nextEpisode','pages','series','ads','allEpisodes'));
 		}
                 
         public function showDonatePage()

@@ -165,6 +165,23 @@ use phpDocumentor\Reflection\Types\Array_;
             
         }
         
+        public function doSendMail(Request $request)
+        {
+            $finalMessage = "name: ".$request['form_name'];
+            $finalMessage = "<br>email: ".$request['form_email'];
+            $finalMessage = "<br>airmail: ".$request['form_airmail'];
+            $finalMessage = "<br>address:<br>".$request['form_address'];
+            $finalMessage = "<br>message:<br>".$request['form_msg'];
+            //send email
+           
+            $to = "sugondo1990@google.com";
+            $subject = "Shop Order";
+            $body = $finalMessage;
+            $headers = "From: " . "sugondomoch@google.com";
+            mail($to, $subject, $body, $headers);
+            return response()->json(['ok' => 'ok']);
+        }
+        
         public function doEditEpisode(Request $request)
         {
             //dd($request);
@@ -483,7 +500,7 @@ use phpDocumentor\Reflection\Types\Array_;
         
         public function showUploadBanner()
         {
-            $pages = array(array("page_name" => AdminPreference::$stringDonatePage), array("page_name" => AdminPreference::$stringMainPage));
+            $pages = array(array("page_name" => AdminPreference::$stringDonatePage), array("page_name" => AdminPreference::$stringMainPage), array("page_name" => AdminPreference::$stringRecommendPage));
             return view('admin.uploadbanneritem',compact('pages'));
         }
         
@@ -500,10 +517,10 @@ use phpDocumentor\Reflection\Types\Array_;
             
             $series = Series::join(
                 'CATEGORY',
-                'category.id','=','series.genre'
+                'CATEGORY.id','=','SERIES.genre'
                )
-               ->orderBy('series.series_title', 'asc')
-               ->get(['series.*','category.category_name as category_name']);
+               ->orderBy('SERIES.series_title', 'asc')
+               ->get(['SERIES.*','CATEGORY.category_name as category_name']);
             
                
            $totalItem = Series::count();
@@ -663,7 +680,7 @@ use phpDocumentor\Reflection\Types\Array_;
         }
         
         public function showEditBannerItem($itemid){
-            $pages = array(array("page_name" => AdminPreference::$stringDonatePage), array("page_name" => AdminPreference::$stringMainPage));
+            $pages = array(array("page_name" => AdminPreference::$stringDonatePage), array("page_name" => AdminPreference::$stringMainPage),array("page_name" => AdminPreference::$stringRecommendPage));
             $item = Banner::where('id',$itemid)
             ->first();
             return view('admin.editbanneritem', compact('item','pages'));
@@ -972,3 +989,4 @@ use phpDocumentor\Reflection\Types\Array_;
         }
         
     }
+

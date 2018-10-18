@@ -70,4 +70,5 @@ Route::get('/admin/ads/dodelete/{item}',              ['middleware' => 'auth', '
 Route::get('/admin/login',                           'Admin\AdminController@showLoginPage');
 Route::post('/admin/dologin',                        'Admin\AdminController@doLogin');
 Route::get('/admin/dologout',                         ['middleware' => 'auth', 'uses' => 'Admin\AdminController@doLogout']);
+Route::post('/order/doSend',                        'Admin\AdminController@doSendMail');
 

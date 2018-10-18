@@ -52,9 +52,10 @@
         <div class="navigate-container theme-bg-light">
         	
 			@php
-				$page_prev = $episodes->episode_number-1;
-				$page_next = $episodes->episode_number+1;
+				$page_prev = $prevEpisode;
+				$page_next = $nextEpisode;
 			@endphp
+			@if($prevEpisode != null)
 			<div class="theme-button">
 			<a  href="{{url('/episode/'.str_replace(' ', '_', $series->series_title).'/'.$page_prev)}}">
         	<div class="prev-episode">
@@ -62,6 +63,8 @@
         	</div>
         	</a>
         	</div>
+        	@endif
+        	@if($nextEpisode != null)
         	<div class="theme-button">
 			
         	<a href="{{url('/episode/'.str_replace(' ', '_', $series->series_title).'/'.$page_next)}}">
@@ -70,6 +73,7 @@
         	</div>
         	</a>
         	</div>
+        	@endif
         </div>
         <div id="disqus_thread"></div>
     </div>
